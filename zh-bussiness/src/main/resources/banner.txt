@@ -1,10 +1,4 @@
 ${AnsiColor.CYAN}
-                    __
-___  ______________/  |_  ____ ___  ___
-\  \/ /  _ \_  __ \   __\/ __ \\  \/  /
- \   (  <_> )  | \/|  | \  ___/ >    <
-  \_/ \____/|__|   |__|  \___  >__/\_ \
-                             \/      \/   恰同学少年，风华正茂；书生意气，挥斥方遒。
-
+                    zhao
 Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}
 ${AnsiColor.WHITE}
