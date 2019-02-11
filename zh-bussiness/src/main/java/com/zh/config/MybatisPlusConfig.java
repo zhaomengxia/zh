@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Profile;
 /**
  * mybatis-plus 相关配置类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @date 2018-08-05 11:07
 
  **/
@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Profile;
 public class MybatisPlusConfig {
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @date 2018/8/5 17:08
      * @Description 配置mapper接口扫描
      **/
@@ -33,7 +33,7 @@ public class MybatisPlusConfig {
     }
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @date 2018/8/5 17:09
      * @Description 逻辑删除插件
      **/
@@ -43,7 +43,7 @@ public class MybatisPlusConfig {
     }
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @date 2018/8/5 17:09
      * @Description 分页插件
      **/
@@ -53,7 +53,7 @@ public class MybatisPlusConfig {
     }
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @date 2018/8/16 10:50
      * @Description 乐观锁插件 实体类需要增加@Version注解
      **/
@@ -63,7 +63,7 @@ public class MybatisPlusConfig {
     }
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @date 2018/8/5 17:10
      * @Description 性能分析拦截器，不建议生产环境使用
      **/

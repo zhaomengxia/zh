@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 /**
  * 验证码 controller
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-12-12 14:53
 
  **/

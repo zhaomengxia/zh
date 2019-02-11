@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 文件上传帮助类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-08-22 10:34
 
  **/
@@ -65,7 +65,7 @@ public class FileHelper {
     /**
      * @param file 需上传的文件
      * @return 文件路径
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 上传文件到服务器（单个）
      * @since 2018/8/22 14:10
      **/
@@ -75,7 +75,7 @@ public class FileHelper {
 
     /**
      * @param file 需上传的文件
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 创建文件目录 格式为 年/月/日
      * @since 2018/8/22 11:24
      **/
@@ -133,7 +133,7 @@ public class FileHelper {
 
     /**
      * @param extension 文件扩展名
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 文件名生成
      * @since 2018/8/22 15:31
      **/
@@ -145,7 +145,7 @@ public class FileHelper {
     /**
      * @param fileWholeName 文件全名称
      * @return 文件扩展名
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 获取文件后缀名 不包含点
      * @since 2018/8/23 14:17
      **/
@@ -158,7 +158,7 @@ public class FileHelper {
     }
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 生成目录层级
      * @since 2018/8/23 14:35
      **/

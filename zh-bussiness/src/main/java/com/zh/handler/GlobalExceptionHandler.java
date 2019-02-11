@@ -21,7 +21,7 @@ import java.util.Set;
 /**
  * 全局异常处理
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @date 2018-08-17 9:56
 
  **/
@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
 
     /**
      * @param e Exception
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 通用exception处理器
      * @since 2018/8/21 15:43
      **/

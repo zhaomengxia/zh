@@ -12,7 +12,7 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-/** 赵梦霞 **/
+/** hahaha **/
 @EnableCaching
 @Configuration
 @SuppressWarnings("unchecked")
@@ -20,7 +20,7 @@ public class RedisConfig {
 
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @date 2018/8/16 16:34
      * @Description 存储redis转换数据使用
      **/
@@ -35,7 +35,7 @@ public class RedisConfig {
     /**
      * @param factory RedisConnectionFactory redis连接工厂对象
      * @return RedisTemplate
-     * @author  赵梦霞
+     * @author  hahaha
      * @date 2018/8/8 16:25
      * @Description RedisTemplate 通用redisTemplate
      **/

@@ -6,7 +6,7 @@ import org.springframework.security.core.AuthenticationException;
 /**
  * 验证码异常
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-12-12 17:02
 
  **/

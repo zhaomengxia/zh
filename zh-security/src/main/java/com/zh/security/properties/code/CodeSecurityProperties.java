@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * 验证码相关配置类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-12-13 11:46
 
  **/

@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /**
  * 手机号验证码登陆配置类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-12-12 13:41
 
  **/

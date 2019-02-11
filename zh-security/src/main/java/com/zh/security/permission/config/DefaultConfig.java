@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  * 默认配置类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-12-14 10:58
 
  **/
@@ -22,7 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class DefaultConfig {
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 密码编码器
      * @since 2018/12/14 14:36
      **/

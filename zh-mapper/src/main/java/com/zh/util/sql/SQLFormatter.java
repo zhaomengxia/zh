@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 /**
  * sql格式化工具类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-11-26 11:42
 
  **/

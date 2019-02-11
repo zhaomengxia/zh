@@ -30,7 +30,7 @@ import java.util.List;
  * <p>
  * 勿提交此文件
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @date 2018-08-06 14:34
 
  **/
@@ -52,7 +52,7 @@ public class Generator {
 
     //项目根路径根据实际路径修改
     private static String PROJECT_PATH = "E:\\code\\zh";
-    private static String AUTHOR = " 赵梦霞 ";
+    private static String AUTHOR = " hahaha ";
 
     //代码生成 根据表生成对应实体类、mapper接口、mapper xml、service以及controller
     @Test

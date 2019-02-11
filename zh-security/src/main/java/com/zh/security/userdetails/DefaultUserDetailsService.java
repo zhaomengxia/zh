@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 /**
  * 默认UserDetailsService
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-12-14 13:56
 
  **/

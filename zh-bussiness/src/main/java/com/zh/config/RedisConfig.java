@@ -42,7 +42,7 @@ import java.util.TimeZone;
 /**
  * redis相关配置类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @date 2018-08-06 11:22
 
  **/
@@ -54,7 +54,7 @@ public class RedisConfig {
 
     /**
      * @return ObjectMapper
-     * @author  赵梦霞
+     * @author  hahaha
      * @date 2018/8/9 14:30
      * @Description 自定义ObjectMapper 通用展示数据
      **/
@@ -73,7 +73,7 @@ public class RedisConfig {
 
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @date 2018/8/16 16:34
      * @Description 存储redis转换数据使用
      **/
@@ -88,7 +88,7 @@ public class RedisConfig {
     /**
      * @param factory RedisConnectionFactory redis连接工厂对象
      * @return RedisTemplate
-     * @author  赵梦霞
+     * @author  hahaha
      * @date 2018/8/8 16:25
      * @Description RedisTemplate 通用redisTemplate
      **/
@@ -116,7 +116,7 @@ public class RedisConfig {
     /**
      * @param factory RedisConnectionFactory redis连接工厂对象
      * @return CacheManager
-     * @author  赵梦霞
+     * @author  hahaha
      * @date 2018/8/8 16:27
      * @Description redis缓存manager 通用manager
      **/
@@ -140,7 +140,7 @@ public class RedisConfig {
 
     /**
      * @param seconds 过期时间 单位：秒（s）
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 配置设置
      * @since 2019/1/24 15:54
      **/
@@ -157,7 +157,7 @@ public class RedisConfig {
     }
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @date 2018/8/16 16:39
      * @Description java8 LocalDateTime LocalDate LocalTime 转换方式
      **/

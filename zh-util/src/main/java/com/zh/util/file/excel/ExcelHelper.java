@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * Copyright 2016 envCloud Inc.
  *
- * @author 赵梦霞
+ * @author hahaha
  * @description:
  */
 
@@ -40,7 +40,7 @@ public class ExcelHelper {
      * @param titleRow         标题行数
      * @param headRow          头行数
      * @param lastOfInvalidRow 忽略最后几行
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 导入excel到List<Map> 集合中
      * @since 2018/12/25 13:50
      **/
@@ -56,7 +56,7 @@ public class ExcelHelper {
      * @param inputStream      excel输入流
      * @param startRowIndex    开始行号
      * @param lastOfInvalidRow 忽略最后几行
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description
      * @since 2018/12/25 17:28
      **/
@@ -72,7 +72,7 @@ public class ExcelHelper {
      * @param sheetName sheet 名称
      * @param clazz     实体类Class对象
      * @param list      数据集合
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 根据实体类注解导出excel
      * @since 2018/12/18 17:15
      **/
@@ -90,7 +90,7 @@ public class ExcelHelper {
      * @param data           导出数据
      * @param title          excel名称
      * @param sheetName      sheet名称
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 根据Map导出excel
      * @since 2018/12/24 10:18
      **/
@@ -102,7 +102,7 @@ public class ExcelHelper {
 
     /**
      * @param response 响应对象
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 设置excel下载响应对象
      * @since 2018/12/18 17:20
      **/

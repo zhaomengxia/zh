@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * 验证码生成类
  * 验证码发送类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-12-12 15:23
 
  **/

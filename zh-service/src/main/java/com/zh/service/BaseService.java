@@ -10,14 +10,14 @@ import java.time.temporal.ChronoUnit;
 /**
  * 通用方法 service
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2019-01-07 14:54
 
  **/
 public class BaseService {
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 判断时间之间间距
      * @since 2019/1/7 9:51
      **/

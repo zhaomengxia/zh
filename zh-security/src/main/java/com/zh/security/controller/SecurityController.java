@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-11-05 16:20
 
  **/
@@ -26,7 +26,7 @@ public class SecurityController {
 
     /**
      * @param token
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 检查token是否过期
      * @since 2018/12/14 15:23
      **/
@@ -40,7 +40,7 @@ public class SecurityController {
     }
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 替换默认登录页，返回json由前端引导至登陆页面
      * @since 2018/12/14 15:22
      **/

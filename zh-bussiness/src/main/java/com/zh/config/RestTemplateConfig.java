@@ -10,7 +10,7 @@ import java.time.Duration;
 /**
  * RestTemplate配置类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-11-21 10:30
 
  **/

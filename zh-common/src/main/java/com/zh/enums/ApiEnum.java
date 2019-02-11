@@ -5,7 +5,7 @@ import lombok.Getter;
 /**
  * Api枚举类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @date 2018-08-24 9:31
 
  **/

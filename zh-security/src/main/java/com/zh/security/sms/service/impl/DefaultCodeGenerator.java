@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 默认验证码生成
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-12-12 15:18
 
  **/

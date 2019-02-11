@@ -27,7 +27,7 @@ import javax.annotation.Resource;
 /**
  * spring security 配置类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-11-01 14:52
 
  **/

@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  *
  * session 配置类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @date 2018-08-16 12:00
 
  **/
@@ -24,7 +24,7 @@ public class HttpSessionConfig {
     private SecurityProperties securityProperties;
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @since 2018/8/27 10:17
      * @Description session策略配置 header 头部信息
      * @return
@@ -35,7 +35,7 @@ public class HttpSessionConfig {
     }
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @since 2018/11/13 14:43
      * @Description 记住我
      **/

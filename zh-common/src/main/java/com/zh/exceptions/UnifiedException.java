@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 统一异常类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since  2018-08-22 13:42
 
  **/

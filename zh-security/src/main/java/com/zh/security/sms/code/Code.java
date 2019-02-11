@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 /**
  * 验证码实体类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-12-12 14:58
 
  **/
@@ -39,7 +39,7 @@ public class Code implements Serializable {
 
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 判断验证码是否过期
      * @since 2018/12/12 17:20
      **/

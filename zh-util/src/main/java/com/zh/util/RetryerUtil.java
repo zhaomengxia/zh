@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * guava retryer重试规则设置帮助类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since  2018-08-22 14:17
 
  **/
@@ -21,7 +21,7 @@ public class RetryerUtil {
     private RetryerUtil(){}
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @date 2018/7/30 14:22
      * @param needRetry 需要重试的返回结果
      * @param sleepTime 间隔时间

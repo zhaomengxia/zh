@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * kafka生产者配置类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-11-16 11:07
 
  **/

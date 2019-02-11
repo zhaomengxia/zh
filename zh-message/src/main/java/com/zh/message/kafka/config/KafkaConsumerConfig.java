@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * kafka消费者配置类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-11-16 11:53
 
  **/

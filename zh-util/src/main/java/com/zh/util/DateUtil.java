@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * 日期时间工具类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-12-05 14:54
 
  **/
@@ -19,7 +19,7 @@ public class DateUtil {
 
     /**
      * @param timestamp 时间戳
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 时间戳转为LocalDateTime对象
      * @since 2018/12/5 14:57
      **/
@@ -29,7 +29,7 @@ public class DateUtil {
 
     /**
      * @param date 日期对象
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description Date 转为 LocalDateTime
      * @since 2018/12/5 15:31
      **/
@@ -41,7 +41,7 @@ public class DateUtil {
     /**
      * @param patten        格式
      * @param localDateTime 需格式化日期对象
-     * @author  赵梦霞
+     * @author  hahaha
      * @since 2018/12/24 11:08
      **/
     public static String parse(String patten, LocalDateTime localDateTime) {
@@ -54,7 +54,7 @@ public class DateUtil {
 
     /**
      * @param localDateTime java8 日期对象
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description LocalDateTime 转为 Date
      * @since 2018/12/5 15:32
      **/
@@ -63,7 +63,7 @@ public class DateUtil {
     }
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @date 2018/6/10 13:20
      * @Description 获取今日零点
      **/

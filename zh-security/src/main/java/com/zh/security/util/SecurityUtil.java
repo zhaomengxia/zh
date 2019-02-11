@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * spring security 相关帮助工具类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-12-17 16:26
 
  **/
@@ -27,7 +27,7 @@ public class SecurityUtil {
     }
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 获取当前登陆用户信息
      * @since 2018/12/17 16:28
      **/
@@ -37,7 +37,7 @@ public class SecurityUtil {
 
     /**
      * @param token
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 根据token获取用户的认证信息
      * @since 2018/12/12 14:44
      **/
@@ -51,7 +51,7 @@ public class SecurityUtil {
     }
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 获取当前用户ip
      * @since 2018/12/17 17:15
      **/
@@ -62,7 +62,7 @@ public class SecurityUtil {
 
     /**
      * @param request 请求对象
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 获取请求ip
      * @since 2018/12/17 17:12
      **/

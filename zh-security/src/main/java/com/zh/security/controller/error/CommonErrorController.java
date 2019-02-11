@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author  赵梦霞
+ * @author  hahaha
  * @since 2018-11-08 10:08
 
  **/
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CommonErrorController {
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 无权限跳转
      * @since 2018/11/8 10:08
      **/
@@ -27,7 +27,7 @@ public class CommonErrorController {
     }
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @Description 404
      * @since 2018/12/14 14:28
      **/

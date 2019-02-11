@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * mybatis-plus 相关配置类
  *
- * @author  赵梦霞
+ * @author  hahaha
  * @date 2018-08-05 11:07
 
  **/
@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 public class MybatisPlusConfig {
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @date 2018/8/5 17:08
      * @Description 配置mapper接口扫描
      **/
@@ -30,7 +30,7 @@ public class MybatisPlusConfig {
     }
 
     /**
-     * @author  赵梦霞
+     * @author  hahaha
      * @date 2018/8/5 17:09
      * @Description 逻辑删除插件
      **/
