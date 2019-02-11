@@ -39,7 +39,6 @@ mybatis-plus:
     #是否开启自动驼峰命名规则
     map-underscore-to-camel-case: true
 #    cache-enabled: false
-
 #security
 security:
   web:
