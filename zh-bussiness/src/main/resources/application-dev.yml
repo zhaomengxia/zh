@@ -2,7 +2,7 @@
 file:
   upload-path: D:/upload/
 server:
-  port: 10086
+  port: 10085
 spring:
   application:
     name: zh-dev
@@ -22,7 +22,7 @@ spring:
         #单纯多数据源配置 可配置多个
         sqlserver:
           driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-          url: jdbc:sqlserver://199.169.16.38;DatabaseName=bfp-jd
+          url: jdbc:sqlserver://192.168.16.35;DatabaseName=bfp-jd
           username: sa
           password: zhao@2018
           hikari:
@@ -33,7 +33,7 @@ spring:
             max-lifetime: 1800000
             connection-timeout: 30000
   redis:
-    host:  192.168.16.15
+    host: 192.168.16.15
     port: 6379
     database: 3
     timeout: 60s  # 数据库连接超时时间，2.0 中该参数的类型为Duration，这里在配置的时候需要指明单位

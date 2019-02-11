@@ -60,8 +60,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title(profiles.toUpperCase() + "环境" + "\t真香API接口文档,如喜欢请投币")
-                .description("restful 风格接口")
+                .title(profiles.toUpperCase() + "环境" + "\tAPI接口文档")
+                .description("restful接口")
                 .version("1.0")
                 .build();
     }

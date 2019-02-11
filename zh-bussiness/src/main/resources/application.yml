@@ -77,7 +77,7 @@ websocket:
     path: /websocket
 #在线预览服务访问路径 外网访问
 onlinePreview:
-  url: http://187.129.177.218:8012/onlinePreview?url=http://{}:{}{}{}
+  url:
 
 #忽略swagger异常
 logging:
