@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.response.ResponseActionMessageMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.response.ResponseActionMessage">
+        <id column="id" property="id"/>
+        <result column="response_record_id" property="responseRecordId"/>
+        <result column="receiver_id" property="receiverId"/>
+        <result column="feedback_time" property="feedbackTime"/>
+        <result column="feedback_content" property="feedbackContent"/>
+        <result column="is_feedback" property="feedback"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, response_record_id, receiver_id, feedback_time, feedback_content, is_feedback
+    </sql>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseDtoResultMap" type="com.zh.dto.response.ReponseActionMessageDTO">
+        <id column="id" property="id"/>
+        <result column="response_record_id" property="responseRecordId"/>
+        <result column="receiverId" property="receiverId"/>
+        <result column="feedback_time" property="feedbackTime"/>
+        <result column="feedback_content" property="feedbackContent"/>
+        <result column="feedback" property="feedback"/>
+        <result column="organizationId" property="organizationId"/>
+        <result column="organizationName" property="organizationName"/>
+        <result column="userName" property="userName"/>
+
+        <result column="areaCode" property="areaCode"/>
+        <result column="areaName" property="areaName"/>
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="BaseDto_Column_List">
+        ram.id, ram.response_record_id, su.id receiverId, ram.feedback_time, ram.feedback_content, ram.is_feedback feedback,
+        su.name userName,bdo.division_name organizationName,bdo.id organizationId, bad.division_code areaCode,bad.division_name areaName
+    </sql>
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseDtoMapResultMap" type="com.zh.dto.response.ResponseStartMapDTO">
+        <result column="responseRecordId" property="responseRecordId"/>
+        <result column="responseDegree" property="responseDegree"/>
+        <result column="responseStatus" property="responseStatus"/>
+        <result column="normal" property="normal"/>
+        <result column="responseStatusValue" property="responseStatusValue"/>
+        <result column="responseDegreeValue" property="responseDegreeValue"/>
+        <result column="warningDegreeValue" property="warningDegreeValue"/>
+        <result column="responseContent" property="responseContent"/>
+        <result column="photo" property="photo"/>
+        <result column="address" property="address"/>
+        <result column="areaCode" property="areaCode"/>
+        <result column="areaName" property="areaName"/>
+        <result column="constractionCompany" property="constractionCompany"/>
+        <result column="isFocus" property="isFocus"/>
+        <result column="latitude" property="latitude"/>
+        <result column="longitude" property="longitude"/>
+        <result column="manageCompany" property="manageCompany"/>
+        <result column="recordLevel" property="recordLevel"/>
+        <result column="recordTime" property="recordTime"/>
+        <result column="responseRecordId" property="responseRecordId"/>
+        <result column="siteCode" property="siteCode"/>
+        <result column="siteId" property="siteId"/>
+        <result column="siteName" property="siteName"/>
+        <result column="status" property="status"/>
+        <result column="telephone" property="telephone"/>
+        <result column="warnId" property="warnId"/>
+        <result column="warningDegreeName" property="warningDegreeName"/>
+        <result column="warningTime" property="warningTime"/>
+        <result column="normalValue" property="normalValue"/>
+        <result column="alarmValue" property="alarmValue"/>
+        <result column="warnName" property="warnName"/>
+        <result column="warningContent" property="warningContent"/>
+        <result column="department" property="department"/>
+        <result column="chargeMan" property="chargeMan"/>
+        <result column="responseJump" property="responseJump"/>
+        <result column="warningJump" property="warningJump"/>
+        <result column="icon" property="icon"/>
+        <collection property="reponseActionMessageDTOS" ofType="com.zh.dto.response.ReponseActionMessageDTO">
+            <result column="receiverId" property="receiverId"/>
+            <result column="feedback_time" property="feedbackTime"/>
+            <result column="feedback_content" property="feedbackContent"/>
+            <result column="feedback" property="feedback"/>
+            <result column="organizationId" property="organizationId"/>
+            <result column="organizationName" property="organizationName"/>
+            <result column="userName" property="userName"/>
+        </collection>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="BaseDtoMap_Column_List">
+         rr.id responseRecordId, su.id receiverId, ram.feedback_time, ram.feedback_content, ram.is_feedback feedback,
+        su.name userName,bdo.division_name organizationName,bdo.id organizationId,rd.name responseDegree,
+         rt.name responseStatus, rr.response_content responseContent, s.id siteId,s.name siteName,s.address address,
+         s.latitude latitude,s.longitude longitude, bad.division_code areaCode,bad.division_name areaName,
+         s.constraction_company constractionCompany,s.manage_company manageCompany,s.photo photo,s.is_focus  isFocus,
+         wr.name warnName,wd.name warningDegreeName,wr.id warnId,wr.warning_time warningTime,
+           wr.warning_value normalValue,wr.data_value alarmValue,wr.warning_content warningContent,
+           rr.charge_man chargeMan,rr.department department,rr.jump responseJump,wd.icon icon,rr.response_status responseStatusValue,
+           rr.response_degree responseDegreeValue,wr.warning_degree warningDegreeValue, wr.jump warningJump, rr.is_normal normal
+    </sql>
+
+    <select id="selectAllActionPage" resultMap="BaseDtoResultMap">
+
+        select
+        <include refid="BaseDto_Column_List"/>
+        from response_action_message ram LEFT JOIN basic_division_organization bdo
+        on ram.organization_id=bdo.id and bdo.is_deleted=0
+        LEFT JOIN sys_user su ON ram.receiver_id=su.id and su.is_deleted=0
+        LEFT JOIN response_record rr on rr.id=ram.response_record_id and rr.is_deleted=0
+        left JOIN warning_record wr on wr.id=rr.warning_record_id and wr.is_deleted=0
+        left JOIN site s on wr.site_id=s.id and s.is_deleted=0
+        LEFT JOIN basic_administrative_division bad on s.area_code=bad.division_code and bad.is_deleted=0
+        where ram.is_deleted=0
+        <if test="f!=null and f == true">
+            and ram.is_feedback = 1
+        </if>
+        <if test="f!=null and f == false">
+            and ram.is_feedback = 0
+        </if>
+
+        <if test="id!=null">
+            and wr.id=#{id}
+        </if>
+        order by ram.feedback_time desc
+    </select>
+    <select id="selectAllStartMapPage" resultMap="BaseDtoMapResultMap">
+        select
+        <include refid="BaseDtoMap_Column_List"/>
+        FROM   warning_record wr
+        left JOIN response_record rr ON rr.warning_record_id=wr.id and rr.is_deleted=0
+        LEFT JOIN response_degree rd on rr.response_degree=rd.status and rd.is_deleted=0
+        left JOIN response_action_message ram on ram.response_record_id=rr.id and ram.is_deleted=0
+        left JOIN warning_degree wd on wr.warning_degree=wd.id and wd.is_deleted=0
+        left JOIN site s on wr.site_id=s.id and s.is_deleted=0
+        LEFT JOIN basic_administrative_division bad ON s.area_code=bad.division_code and bad.is_deleted=0
+        LEFT JOIN basic_division_organization bdo on ram.organization_id=bdo.id and bdo.is_deleted=0
+        LEFT JOIN sys_user su ON ram.receiver_id=su.id and su.is_deleted=0
+        left JOIN response_type rt on rr.response_status=rt.status and rt.is_deleted=0
+        where wr.is_deleted=0 and (wr.status =4) and (rr.response_status =1)
+
+        <if test="f!=null and f == true">
+            and ram.is_feedback = 1
+        </if>
+        <if test="f!=null and f == false">
+            and ram.is_feedback = 0
+        </if>
+
+        <if test="id!=null">
+            and wr.id=#{id}
+        </if>
+        order by ram.feedback_time desc
+    </select>
+    <select id="selectAllStartPage" resultMap="BaseDtoMapResultMap">
+        select
+        <include refid="BaseDtoMap_Column_List"/>
+        FROM   warning_record wr
+        left JOIN response_record rr ON rr.warning_record_id=wr.id and rr.is_deleted=0
+        LEFT JOIN response_degree rd on rr.response_degree=rd.status and rd.is_deleted=0
+        left JOIN response_action_message ram on ram.response_record_id=rr.id and ram.is_deleted=0
+        left JOIN warning_degree wd on wr.warning_degree=wd.id and wd.is_deleted=0
+        left JOIN site s on wr.site_id=s.id and s.is_deleted=0
+        LEFT JOIN basic_administrative_division bad ON s.area_code=bad.division_code and bad.is_deleted=0
+        LEFT JOIN basic_division_organization bdo on ram.organization_id=bdo.id and bdo.is_deleted=0
+        LEFT JOIN sys_user su ON ram.receiver_id=su.id and su.is_deleted=0
+        left JOIN response_type rt on rr.response_status=rt.status and rt.is_deleted=0
+        where wr.is_deleted=0
+
+        <if test="id!=null">
+            and wr.id=#{id}
+        </if>
+    </select>
+
+</mapper>

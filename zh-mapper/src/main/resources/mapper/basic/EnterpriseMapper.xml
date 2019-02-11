@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.basic.EnterpriseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.basic.Enterprise">
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="type" property="type" />
+        <result column="area_code" property="areaCode" />
+        <result column="area_name" property="areaName"/>
+        <result column="address" property="address" />
+        <result column="nature" property="nature" />
+        <result column="duty_number" property="dutyNumber" />
+        <result column="average_output_value" property="averageOutputValue" />
+        <result column="hazardous_chemicals" property="hazardousChemicals" />
+        <result column="is_waterlogged" property="waterlogged" />
+        <result column="is_flood_threat" property="floodThreat" />
+        <result column="description" property="description" />
+        <result column="is_deleted" property="deleted" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, type, area_code, area_name, address, nature, duty_number, average_output_value, hazardous_chemicals, is_waterlogged, is_flood_threat, description, is_deleted, create_time, update_time
+    </sql>
+
+    <!-- 分页查询企事业单位 -->
+    <select id="getEnterpriseListPage" resultType="com.zh.dto.basic.EnterpriseDTO">
+        select
+        id id,
+        name name,
+        type type,
+        area_code areaCode,
+        area_name areaName,
+        address address,
+        nature nature,
+        duty_number dutyNumber,
+        average_output_value averageOutputValue,
+        hazardous_chemicals hazardousChemicals,
+        is_waterlogged waterlogged,
+        is_flood_threat floodThreat,
+        description description
+        from enterprise
+        where is_deleted = 0
+        <if test="keyword != null and keyword != ''">
+            <bind name="keyword" value="'%'+keyword+'%'"/>
+            and concat(name, type, area_code, area_name, address, nature, duty_number, average_output_value, hazardous_chemicals, description)
+            like #{keyword}
+        </if>
+    </select>
+
+</mapper>

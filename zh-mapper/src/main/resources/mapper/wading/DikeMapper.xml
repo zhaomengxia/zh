@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.wading.DikeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.wading.Dike">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="code" property="code" />
+        <result column="area_code" property="areaCode" />
+        <result column="river" property="river" />
+        <result column="river_type" property="riverType" />
+        <result column="transboundary" property="transboundary" />
+        <result column="recurrence_period" property="recurrencePeriod" />
+        <result column="type" property="type" />
+        <result column="form" property="form" />
+        <result column="degree" property="degree" />
+        <result column="length" property="length" />
+        <result column="standard_length" property="standardLength" />
+        <result column="altitude_system" property="altitudeSystem" />
+        <result column="design_level" property="designLevel" />
+        <result column="height_max" property="heightMax" />
+        <result column="height_min" property="heightMin" />
+        <result column="width_max" property="widthMax" />
+        <result column="width_min" property="widthMin" />
+        <result column="engineering_task" property="engineeringTask" />
+        <result column="start_altitude" property="startAltitude" />
+        <result column="end_altitude" property="endAltitude" />
+        <result column="description" property="description" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_deleted" property="deleted" />
+    </resultMap>
+
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultDtoMap" type="com.zh.dto.wading.DikeDTO">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="code" property="code" />
+        <result column="areaCode" property="areaCode" />
+        <result column="river" property="river" />
+        <result column="river_type" property="riverType" />
+        <result column="transboundary" property="transboundary" />
+        <result column="recurrence_period" property="recurrencePeriod" />
+        <result column="type" property="type" />
+        <result column="form" property="form" />
+        <result column="degree" property="degree" />
+        <result column="length" property="length" />
+        <result column="standard_length" property="standardLength" />
+        <result column="altitude_system" property="altitudeSystem" />
+        <result column="design_level" property="designLevel" />
+        <result column="height_max" property="heightMax" />
+        <result column="height_min" property="heightMin" />
+        <result column="width_max" property="widthMax" />
+        <result column="width_min" property="widthMin" />
+        <result column="engineering_task" property="engineeringTask" />
+        <result column="start_altitude" property="startAltitude" />
+        <result column="end_altitude" property="endAltitude" />
+        <result column="description" property="description" />
+        <result column="areaName" property="areaName" />
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="BaseDto_Column_List">
+        d.id, d.name, d.code, bad.division_code areaCode, d.river, d.river_type, d.transboundary, d.type,
+        d.form, d.degree, d.length, d.standard_length, d.altitude_system, d.design_level,
+        d.height_max, d.height_min, d.width_max, d.width_min, d.engineering_task,
+        d.start_altitude, d.end_altitude, d.description,d.recurrence_period, bad.division_name areaName
+    </sql>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, code, area_code, river, river_type, transboundary, type,recurrence_period, form, degree, length, standard_length, altitude_system, design_level, height_max, height_min, width_max, width_min, engineering_task, start_altitude, end_altitude, description, create_time, update_time, is_deleted
+    </sql>
+    <select id="selectAllByMessage" resultMap="BaseResultDtoMap">
+        select
+        <include refid="BaseDto_Column_List"/>
+        from dike d LEFT JOIN basic_administrative_division bad
+        ON d.area_code=bad.division_code
+        WHERE d.is_deleted=0 and bad.is_deleted=0
+        <if test="keywords != null and '' !=keywords ">
+            <bind name="keywords" value="'%'+keywords+'%'"/>
+            and CONCAT(d.name,d.code,bad.division_code,d.river_type,d.river,
+            bad.division_name,d.transboundary,d.type ,d.form,d.degree,d.description,d.engineering_task,
+            d.start_altitude, d.end_altitude,d.height_max, d.height_min, d.width_max, d.width_min,d.recurrence_period) like #{keywords}
+        </if>
+
+        Order by d.create_time desc
+
+    </select>
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.basic.CountryEconomicMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.basic.CountryEconomic">
+        <result column="id" property="id" />
+        <result column="index_one" property="indexOne" />
+        <result column="unit" property="unit" />
+        <result column="number" property="number" />
+        <result column="is_deleted" property="deleted" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="type" property="type" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, index_one, unit, number, is_deleted, create_time, update_time, type
+    </sql>
+    <select id="getList" resultType="com.zh.entity.basic.CountryEconomic">
+        select
+        id id,
+        index_one indexOne,
+        unit unit,
+        type type,
+        number number
+        from country_economic
+        where is_deleted = 0
+        <if test="keyword != null and keyword != ''">
+            <bind name="keyword" value="'%'+keyword+'%'"/>
+            and concat(index_one, unit) like #{keyword}
+        </if>
+    </select>
+
+</mapper>

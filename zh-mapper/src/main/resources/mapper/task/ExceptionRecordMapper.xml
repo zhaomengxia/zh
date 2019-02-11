@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.task.ExceptionRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.task.ExceptionRecord">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="exception_point" property="exceptionPoint"/>
+        <result column="report_time" property="reportTime"/>
+        <result column="instruction" property="instruction"/>
+        <result column="status" property="status"/>
+        <result column="report_name" property="reportName"/>
+        <result column="report_man" property="reportMan"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <resultMap id="ExceptionListResultMap" type="com.zh.entity.task.ExceptionRecord">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="exception_point" property="exceptionPoint"/>
+        <result column="report_time" property="reportTime"/>
+        <result column="instruction" property="instruction"/>
+        <result column="status" property="status"/>
+        <result column="reportMan" property="reportMan"/>
+        <result column="reportName" property="reportName"/>
+        <collection property="attachments" ofType="com.zh.entity.task.ExceptionAttachment">
+            <id column="aId" property="id"/>
+            <result column="type" property="type"/>
+            <result column="path" property="path"/>
+        </collection>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, title, exception_point, report_time, instruction, status, report_man,is_deleted, create_time, update_time
+    </sql>
+
+    <select id="selectExceptionList" resultMap="ExceptionListResultMap">
+        select r.id,
+        r.title title,
+        r.exception_point exceptionPoint,
+        r.report_man reportMan,
+        r.report_name reportName,
+        r.report_time reportTime,
+        r.instruction instruction,
+        r.status status,
+        a.id aId,
+        a.type type,
+        a.path path
+        from exception_record r
+        left join exception_attachment a on r.id = a.exception_id and a.is_deleted = 0
+        where r.is_deleted = 0
+        <if test="userId !=null">
+            and r.report_man = #{userId}
+        </if>
+        and r.status = #{status}
+
+    </select>
+
+</mapper>

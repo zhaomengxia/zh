@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.investigation.FloodThreatenWarningMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.investigation.FloodThreatenWarning">
+        <id column="id" property="id"/>
+        <result column="division_code" property="divisionCode"/>
+        <result column="division_name" property="divisionName"/>
+        <result column="river_name" property="riverName"/>
+        <result column="river_code" property="riverCode"/>
+        <result column="river_control_code" property="riverControlCode"/>
+        <result column="warning_site_name" property="warningSiteName"/>
+        <result column="warning_site_code" property="warningSiteCode"/>
+        <result column="warning_style" property="warningStyle"/>
+        <result column="warning_value" property="warningValue"/>
+        <result column="remark" property="remark"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, division_code, division_name, river_name, river_code, river_control_code, warning_site_name, warning_site_code, warning_style, warning_value, remark, is_deleted, create_time, update_time
+    </sql>
+
+    <!-- 模糊查询字段列 -->
+    <sql id="Query_List">
+        division_code, division_name, river_name, river_code, river_control_code, warning_site_name, warning_site_code, warning_style, warning_value, remark
+    </sql>
+
+    <sql id="Result_List">
+        id, division_code, division_name, river_name, river_code, river_control_code, warning_site_name, warning_site_code, warning_style, warning_value, remark
+    </sql>
+
+    <select id="getPageList" resultType="com.zh.entity.investigation.FloodThreatenWarning">
+        select
+        <include refid="Base_Column_List"/>
+        from flood_threaten_warning
+        where is_deleted = 0
+        <if test="keyword != null and keyword != ''">
+            <bind name="keyword" value="'%'+keyword+'%'"/>
+            and concat(<include refid="Query_List"/>) like #{keyword}
+        </if>
+    </select>
+
+    <select id="getList" resultType="com.zh.dto.basic.FloodThreatenWarningDTO">
+        select
+        <include refid="Result_List"/>
+        from flood_threaten_warning
+        where is_deleted = 0
+        <if test="keyword != null and keyword != ''">
+            <bind name="keyword" value="'%'+keyword+'%'"/>
+            and concat(<include refid="Query_List"/>) like #{keyword}
+        </if>
+    </select>
+
+</mapper>

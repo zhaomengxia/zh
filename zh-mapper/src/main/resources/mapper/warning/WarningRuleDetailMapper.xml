@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.warning.WarningRuleDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.warning.WarningRuleDetail">
+        <id column="id" property="id" />
+        <result column="rule_id" property="ruleId" />
+        <result column="warning_value" property="warningValue" />
+        <result column="time_zone" property="timeZone" />
+        <result column="is_deleted" property="deleted" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="warning_degree" property="warningDegree"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, rule_id, warning_value, time_zone, is_deleted, create_time, update_time, warning_degree
+    </sql>
+    <select id="getDetailByRuleId" resultType="com.zh.entity.warning.WarningRuleDetail">
+        select <include refid="Base_Column_List"/>
+        from warning_rule_detail
+        where rule_id = #{ruleId}
+        and is_deleted = 0
+        order by warning_value desc
+    </select>
+
+</mapper>

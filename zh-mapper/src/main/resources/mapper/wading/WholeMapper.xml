@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.wading.WholeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.wading.Whole">
+        <id column="id" property="id" />
+        <result column="area_code" property="areaCode" />
+        <result column="dike_length" property="dikeLength" />
+        <result column="water_count" property="waterCount" />
+        <result column="road_count" property="roadCount" />
+        <result column="bridge_count" property="bridgeCount" />
+        <result column="pump_count" property="pumpCount" />
+        <result column="is_deleted" property="deleted" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, area_code, dike_length, water_count, road_count, bridge_count, pump_count, is_deleted, create_time, update_time
+    </sql>
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseDtoResultMap" type="com.zh.dto.wading.WholeDTO">
+        <id column="id" property="id" />
+        <result column="areaCode" property="areaCode" />
+        <result column="dike_length" property="dikeLength" />
+        <result column="water_count" property="waterCount" />
+        <result column="road_count" property="roadCount" />
+        <result column="bridge_count" property="bridgeCount" />
+        <result column="pump_count" property="pumpCount" />
+        <result column="areaName" property="areaName"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="BaseDto_Column_List">
+        w.id,  bad.division_code areaCode, w.dike_length, w.water_count, w.road_count, w.bridge_count, w.pump_count, bad.division_name areaName
+    </sql>
+
+    <select id="selectbyMessage" resultMap="BaseDtoResultMap">
+        select <include refid="BaseDto_Column_List"/>
+        from whole w LEFT JOIN basic_administrative_division bad
+        ON w.area_code=bad.division_code
+        WHERE w.is_deleted=0 and bad.is_deleted=0
+        <if test="keywords != null and ''!=keywords">
+            <bind name="keywords" value="'%'+keywords+'%'"/>
+            and CONCAT(w.area_code,bad.division_code,bad.division_name,
+            w.dike_length, w.water_count, w.road_count, w.bridge_count, w.pump_count) like #{keywords}
+        </if>
+        Order by w.create_time desc
+    </select>
+
+</mapper>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.response.ResponseRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.response.ResponseRecord">
+        <id column="id" property="id" />
+        <result column="warning_record_id" property="warningRecordId" />
+        <result column="response_degree" property="responseDegree" />
+        <result column="response_content" property="responseContent" />
+        <result column="response_status" property="responseStatus" />
+        <result column="is_deleted" property="deleted" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="charge_man" property="chargeMan" />
+        <result column="department" property="department" />
+        <result column="response_time" property="responseTime" />
+        <result column="is_normal" property="normal"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, warning_record_id, response_degree, response_content, response_status, is_deleted, create_time, update_time, charge_man, department, response_time, is_normal
+    </sql>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseDtoResultMap" type="com.zh.dto.response.ResponseManageDTO">
+        <id column="id" property="id" />
+        <result column="responseRecordId" property="responseRecordId" />
+        <result column="responseDegree" property="responseDegree" />
+        <result column="response_content" property="responseContent" />
+        <result column="responseStatus" property="responseStatus" />
+        <result column="areaCode" property="areaCode" />
+        <result column="areaName" property="areaName" />
+        <result column="siteId" property="siteId" />
+        <result column="charge_man" property="chargeMan" />
+        <result column="department" property="department" />
+        <result column="response_time" property="responseTime" />
+        <result column="siteName" property="siteName"/>
+        <result column="warningTime" property="warningTime"/>
+        <result column="warningName" property="warningName"/>
+        <result column="warningDegree" property="warningDegree"/>
+        <result column="statusValue" property="statusValue"/>
+        <result column="status" property="status"/>
+        <result column="responseStatusValue" property="responseStatusValue"/>
+        <result column="responseJump" property="responseJump"/>
+        <result column="warnJump" property="warnJump"/>
+        <result column="isNormal" property="isNormal"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="BaseDto_Column_List">
+        wr.id, rr.id responseRecordId,rd.name responseDegree,rr.response_status responseStatusValue,
+         rr.response_content, rt.name responseStatus, rr.is_normal isNormal,
+         s.name siteName, s.id siteId, bad.division_code areaCode,
+         bad.division_name areaName, rr.charge_man, rr.department,ws."value" statusValue,
+          rr.response_time,wr.name warningName,wr.warning_time warningTime,
+          wd.name warningDegree, ws.name status,rr.jump responseJump,wr.jump warnJump
+    </sql>
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseByWarnIdResultMap" type="com.zh.dto.response.ResponseRecordDTO">
+        <id column="id" property="id" />
+        <result column="warningRecordId" property="warningRecordId" />
+        <result column="response_degree" property="responseDegree" />
+        <result column="response_content" property="responseContent" />
+        <result column="responseStatus" property="responseStatus" />
+        <result column="responseDegreeName" property="responseDegreeName" />
+        <result column="charge_man" property="chargeMan" />
+        <result column="department" property="department" />
+        <result column="response_time" property="responseTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="BaseByWarnId_Column_List">
+        rr.id, wr.id warningRecordId, rr.response_degree, rr.response_content,
+        rt.name responseStatus,rr.charge_man, rr.department, rr.response_time,rd.name responseDegreeName
+    </sql>
+
+    <select id="selectAll" resultMap="BaseDtoResultMap">
+
+        select
+        <include refid="BaseDto_Column_List"/>
+        FROM  response_record rr
+        LEFT JOIN warning_record wr ON wr.id=rr.warning_record_id and wr.is_deleted=0
+        LEFT JOIN warning_degree wd on wr.warning_degree=wd.id and wd.is_deleted=0
+        LEFT JOIN warning_status ws on wr.status=ws."value" and ws.is_deleted=0
+        left JOIN response_type rt on rr.response_status=rt.status and rt.is_deleted=0
+        left JOIN site s ON  wr.site_id=s.id and s.is_deleted=0
+        LEFT JOIN response_degree rd ON rr.response_degree=rd.status and rd.is_deleted=0
+        LEFT JOIN basic_administrative_division bad on s.area_code=bad.division_code and bad.is_deleted=0
+        WHERE rr.is_deleted=0  and (rr.response_status in(1,2,3,4))
+        <if test="keywords != null and '' != keywords">
+            <bind name="keywords" value="'%'+keywords+'%'"/>
+            and CONCAT(wr.name,wr.address,wr.warning_degree,bad.division_code,bad.division_name,wd.name,
+            s.name,rt.name,rr.charge_man,rr.department,rr.response_content,rr.response_degree) like #{keywords}
+        </if>
+        Order by rr.response_time desc
+    </select>
+
+    <select id="selectResponseStartByWarnId" resultMap="BaseByWarnIdResultMap">
+        select
+        <include refid="BaseByWarnId_Column_List"/>
+        FROM response_record rr left JOIN response_degree rd ON rr.response_degree=rd.status and rd.is_deleted=0
+        left JOIN response_type rt on rr.response_status=rt.status AND rt.is_deleted=0
+        LEFT JOIN warning_record wr on rr.warning_record_id=wr.id and wr.is_deleted=0
+        where rr.is_deleted=0
+
+        <if test=" type!=null">
+            and rr.response_status=#{type}
+        </if>
+
+        <if test=" id!=null">
+            and wr.id=#{id}
+        </if>
+
+    </select>
+
+</mapper>

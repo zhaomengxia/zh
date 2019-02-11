@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.warning.WarningRecordInsideMessageMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.warning.WarningRecordInsideMessage">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="back_content" property="backContent"/>
+        <result column="back_time" property="backTime"/>
+        <result column="is_back" property="back"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="warn_record_id" property="warnRecordId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, back_content, back_time, is_back, create_time, update_time, is_deleted, warn_record_id
+    </sql>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseDtoResultMap" type="com.zh.dto.warning.WarningRecordInsideMessageDTO">
+        <result column="warnRecordId" property="warnRecordId"/>
+        <result column="warnRecordName" property="warnRecordName"/>
+        <result column="warningContent" property="warningContent"/>
+        <result column="warningDegreeName" property="warningDegreeName"/>
+        <result column="warningStatus" property="warningStatus"/>
+        <result column="warningTime" property="warningTime"/>
+        <result column="department" property="department"/>
+        <result column="chargeMan" property="chargeMan"/>
+        <result column="publishContent" property="publishContent"/>
+        <result column="publishPerson" property="publishPerson"/>
+        <collection property="warningRecordInsideMessages"
+                    ofType="com.zh.entity.warning.WarningRecordInsideMessage">
+            <id column="id" property="id"/>
+            <result column="userId" property="userId"/>
+            <result column="userName" property="userName"/>
+            <result column="back_content" property="backContent"/>
+            <result column="back_time" property="backTime"/>
+            <result column="is_back" property="back"/>
+            <result column="create_time" property="createTime"/>
+            <result column="update_time" property="updateTime"/>
+            <result column="is_deleted" property="deleted"/>
+        </collection>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="BaseDto_Column_List">
+        wrim.id, su.id, wrim.back_content, wrim.back_time, wrim.is_back,iwr.head_quarters department,iwr.charge_man chargeMan,
+         wr.name warnRecordName, wr.id warnRecordId,wr.warning_content warningContent,wd.name warningDegreeName,
+         ws.name warningStatus,wr.warning_time warningTime,su.name userName,su.id userId,iwr.publish_content publishContent, iwr.publish_person publishPerson
+    </sql>
+
+    <select id="selectAllWarnInsideMessageById" resultMap="BaseDtoResultMap">
+        select
+        <include refid="BaseDto_Column_List"/>
+        FROM  inner_warning_record iwr
+        LEFT JOIN  warning_record_inside_message wrim  on wrim.warn_record_id=iwr.id and wrim.is_deleted=0
+        LEFT JOIN warning_record wr on wr.id=iwr.warning_record_id and wr.is_deleted=0
+        left JOIN warning_degree wd on wr.warning_degree=wd.id and wd.is_deleted=0
+        left JOIN warning_status ws on wr.status=ws."value" and ws.is_deleted=0
+        LEFT JOIN sys_user su on wrim.user_id=su.id and su.is_deleted=0
+        WHERE iwr.is_deleted=0
+
+        <if test=" id!=null">
+            and iwr.warning_record_id=#{id}
+        </if>
+        order by wrim.back_time desc
+    </select>
+
+</mapper>

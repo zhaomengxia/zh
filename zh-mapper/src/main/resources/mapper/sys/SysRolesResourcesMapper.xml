@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.sys.SysRolesResourcesMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.sys.SysRolesResources">
+        <id column="id" property="id" />
+        <result column="sys_roles_id" property="sysRolesId" />
+        <result column="sys_resources_id" property="sysResourcesId" />
+        <result column="has_persission" property="hasPersission" />
+    </resultMap>
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultDtoMap" type="com.zh.dto.sys.role.SysRoleResourseDTO">
+        <id column="id" property="id" />
+        <result column="name" property="sysResourcesName" />
+        <result column="http_path" property="httpPath" />
+        <result column="parent_id" property="parentId" />
+        <result column="node" property="node" />
+        <result column="has_persission" property="hasPersission" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Dto_Column_List">
+        s.id,r.has_persission,s.name,s.http_path,s.parent_id,s.node
+    </sql>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, sys_roles_id, sys_resources_id,has_persission
+    </sql>
+    <delete id="deleteByRoleId">
+        DELETE from sys_roles_resources where sys_roles_id=#{roleId}
+    </delete>
+    <select id="selectByRoleId" resultMap="BaseResultDtoMap">
+
+        SELECT <include refid="Dto_Column_List"/>
+        FROM sys_roles_resources r LEFT JOIN sys_resources s on r.sys_resources_id=s.id
+        WHERE s.is_deleted=0 AND r.sys_roles_id=#{roleId}
+
+    </select>
+
+
+</mapper>

@@ -1,0 +1,37 @@
+server:
+  port: 9988
+spring:
+  profiles:
+    active: dev
+  #指定项目静态资源路径
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.zh.entity
+  #typeEnumsPackage: com.baomidou.springboot.entity.enums
+  global-config:
+    # 数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)",   UUID:"全局唯一ID UUID";
+      id-type: id_worker
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: not_empty
+      #数据库是否开启大写命名
+      capital-mode: true
+      #逻辑删除配置
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+    #关闭banner打印
+    banner: false
+    #是否缓存 Sql 解析，默认不缓存
+    sql-parser-cache: true
+  # 原生配置
+  configuration:
+    #是否开启自动驼峰命名规则
+    map-underscore-to-camel-case: true
+#websocket
+websocket:
+  endpoint:
+    path: /zh-websocket
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.basic.PolderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.basic.Polder">
+        <id column="id" property="id" />
+        <result column="area_name" property="areaName" />
+        <result column="area_code" property="areaCode" />
+        <result column="polder_name" property="polderName" />
+        <result column="dike_length" property="dikeLength" />
+        <result column="dike_altitude" property="dikeAltitude" />
+        <result column="dike_width" property="dikeWidth" />
+        <result column="polder_area" property="polderArea" />
+        <result column="village_platform_altitude" property="villagePlatformAltitude" />
+        <result column="village_platform_area" property="villagePlatformArea" />
+        <result column="pump_num" property="pumpNum" />
+        <result column="pump_rate" property="pumpRate" />
+        <result column="drainage_flow" property="drainageFlow" />
+        <result column="drainage_rate" property="drainageRate" />
+        <result column="culvert" property="culvert" />
+        <result column="gate" property="gate" />
+        <result column="is_deleted" property="deleted" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, area_name, area_code, polder_name, dike_length, dike_altitude, dike_width, polder_area,
+        village_platform_altitude, village_platform_area, pump_num, pump_rate, drainage_flow, drainage_rate,
+        culvert, gate, is_deleted, create_time, update_time
+    </sql>
+    <sql id="Blur_Column_List">
+        area_name, area_code, polder_name, dike_length, dike_altitude, dike_width, polder_area,
+        village_platform_altitude, village_platform_area, pump_num, pump_rate, drainage_flow, drainage_rate,
+        culvert, gate
+    </sql>
+    <select id="getListPage" resultType="com.zh.entity.basic.Polder">
+        select <include refid="Base_Column_List"/>
+        from polder
+        where is_deleted = 0
+        <if test="keywords != null and keywords != ''">
+            <bind name="keywords" value="'%'+keywords+'%'"/>
+            and concat(<include refid="Blur_Column_List"/>) like #{keywords}
+        </if>
+        order by create_time desc
+    </select>
+
+</mapper>

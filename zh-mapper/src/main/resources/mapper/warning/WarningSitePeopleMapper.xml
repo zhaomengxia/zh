@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.warning.WarningSitePeopleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.warning.WarningSitePeople">
+        <result column="id" property="id" />
+        <result column="head_quarters" property="headQuarters" />
+        <result column="charge_man" property="chargeMan" />
+        <result column="is_deleted" property="deleted" />
+        <result column="site_id" property="siteId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, head_quarters, charge_man, is_deleted, site_id
+    </sql>
+    <select id="getSitePeople" resultType="com.zh.entity.warning.WarningSitePeople">
+        select <include refid="Base_Column_List"/>
+        from warning_site_people
+        where is_deleted = 0 and site_id = #{siteId}
+    </select>
+    <sql id="Key_Value_List">
+        id id, name name
+    </sql>
+
+    <select id="getHeadQuarters" resultType="com.zh.dto.basic.KeyValueDTO">
+        select
+        id id,
+        division_name name
+        from basic_division_organization
+        where id in (${ids}) and is_deleted = 0
+    </select>
+
+
+    <select id="getChargeMan" resultType="com.zh.dto.basic.KeyValueDTO">
+        select <include refid="Key_Value_List"/>
+        from flood_duty_type
+        where id in (${ids}) and is_deleted = 0
+    </select>
+
+
+</mapper>

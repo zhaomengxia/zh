@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.wading.SmallReservoirMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.wading.SmallReservoir">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="area_code" property="areaCode" />
+        <result column="code" property="code" />
+        <result column="capacity" property="capacity" />
+        <result column="height" property="height" />
+        <result column="length" property="length" />
+        <result column="type" property="type" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_deleted" property="deleted" />
+    </resultMap>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultDtoMap" type="com.zh.dto.wading.SmallReservoirDTO">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="areaCode" property="areaCode" />
+        <result column="code" property="code" />
+        <result column="capacity" property="capacity" />
+        <result column="height" property="height" />
+        <result column="length" property="length" />
+        <result column="type" property="type" />
+        <result column="areaName" property="areaName"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, area_code, code, capacity, height, length, type, create_time, update_time, is_deleted
+    </sql>
+
+    <!-- 通用查询结果列 -->
+    <sql id="BaseDto_Column_List">
+        sr.id, sr.name, bad.division_code areaCode, sr.code, sr.capacity, sr.height, sr.length, sr.type, bad.division_name areaName
+    </sql>
+
+    <select id="selectbyMessage" resultMap="BaseResultDtoMap">
+        select <include refid="BaseDto_Column_List"/>
+        from small_reservoir sr LEFT JOIN basic_administrative_division bad
+        ON sr.area_code=bad.division_code
+        WHERE sr.is_deleted=0 and bad.is_deleted=0
+
+        <if test="keywords != null and '' != keywords">
+            <bind name="keywords" value="'%'+keywords+'%'"/>
+            and CONCAT(sr.name,sr.code,bad.division_code,sr.capacity, sr.height, sr.length, sr.type, bad.division_name) like #{keywords}
+        </if>
+        Order by sr.create_time desc
+
+    </select>
+
+</mapper>

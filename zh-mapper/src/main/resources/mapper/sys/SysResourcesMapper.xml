@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.sys.SysResourcesMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.sys.SysResources">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="description" property="description" />
+        <result column="http_path" property="httpPath" />
+        <result column="is_deleted" property="deleted" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="parent_id" property="parentId"/>
+        <result column="node" property="node"/>
+        <result column="layer" property="layer"/>
+        <result column="seq" property="seq"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, description, http_path, is_deleted, create_time, update_time, parent_id, node, layer, seq
+    </sql>
+
+    <!-- 根据父类id和顺序获取菜单列 -->
+    <select id="getMenuByParentIdAndSeq" resultType="com.zh.entity.sys.SysResources">
+        select <include refid="Base_Column_List" />
+        from sys_resources sr
+        where sr.is_deleted = 0
+        and sr.parent_id = #{parentId}
+        and sr.seq = #{seq}
+    </select>
+
+    <!-- 根据父类id获取菜单列 -->
+    <select id="getMenuByParentId" resultType="com.zh.entity.sys.SysResources">
+        select <include refid="Base_Column_List"/>
+        from sys_resources sr
+        where sr.is_deleted = 0
+        and sr.parent_id = #{parentId}
+    </select>
+
+
+</mapper>

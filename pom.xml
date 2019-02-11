@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.zh</groupId>
+    <artifactId>zh</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>zh</name>
+    <description>zhao</description>
+    <modules>
+        <module>zh-common</module>
+        <module>zh-util</module>
+        <module>zh-security</module>
+        <module>zh-message</module>
+        <module>zh-entity</module>
+        <module>zh-dto</module>
+        <module>zh-mapper</module>
+        <module>zh-service</module>
+        <module>zh-bussiness</module>
+        <module>zh-task</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring-boot.version>2.1.2.RELEASE</spring-boot.version>
+        <spring-cloud.version>Finchley.SR2</spring-cloud.version>
+        <java.version>1.8</java.version>
+        <zh.version>0.0.1-SNAPSHOT</zh.version>
+        <mybatis-plus.version>3.0.8.3-SNAPSHOT</mybatis-plus.version>
+        <easypoi.version>4.0.0</easypoi.version>
+        <guava.version>23.0</guava.version>
+        <guava-retrying.version>2.0.0</guava-retrying.version>
+        <flowable.version>6.3.1</flowable.version>
+        <swagger.version>2.9.2</swagger.version>
+        <hutool.version>4.4.2</hutool.version>
+        <baidu.version>4.7.0</baidu.version>
+        <velocity.version>2.0</velocity.version>
+        <!--<rxjava.version>2.2.3</rxjava.version>-->
+        <dynamic.version>2.5.0</dynamic.version>
+        <!--<oracle.version>12.2.0.1</oracle.version>-->
+        <p6spy.version>3.8.0</p6spy.version>
+        <!-- 打包跳过测试 -->
+        <skipTests>true</skipTests>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.zh</groupId>
+                <artifactId>zh-common</artifactId>
+                <version>${zh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zh</groupId>
+                <artifactId>zh-util</artifactId>
+                <version>${zh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zh</groupId>
+                <artifactId>zh-security</artifactId>
+                <version>${zh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zh</groupId>
+                <artifactId>zh-message</artifactId>
+                <version>${zh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zh</groupId>
+                <artifactId>zh-entity</artifactId>
+                <version>${zh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zh</groupId>
+                <artifactId>zh-dto</artifactId>
+                <version>${zh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zh</groupId>
+                <artifactId>zh-mapper</artifactId>
+                <version>${zh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zh</groupId>
+                <artifactId>zh-service</artifactId>
+                <version>${zh.version}</version>
+            </dependency>
+            <dependency>
+                <!-- Import dependency management from Spring Boot -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- mybatis-plus begin -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!-- mybatis-plus end -->
+
+            <!-- swagger start-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <!-- swagger end -->
+
+            <!-- 各种工具类 start -->
+
+            <!-- guava retrying -->
+            <dependency>
+                <groupId>com.github.rholder</groupId>
+                <artifactId>guava-retrying</artifactId>
+                <version>${guava-retrying.version}</version>
+            </dependency>
+
+            <!-- 超级工具类 hutool -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <!-- easy-poi -->
+            <dependency>
+                <groupId>cn.afterturn</groupId>
+                <artifactId>easypoi-base</artifactId>
+                <version>${easypoi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.afterturn</groupId>
+                <artifactId>easypoi-annotation</artifactId>
+                <version>${easypoi.version}</version>
+            </dependency>
+
+            <!-- 各种工具类 end -->
+
+            <!-- 模板 start -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+            <!-- 模板 end-->
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${dynamic.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>p6spy</groupId>
+                <artifactId>p6spy</artifactId>
+                <version>${p6spy.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <delimiters>
+                        <delimiter>@</delimiter>
+                    </delimiters>
+                    <useDefaultDelimiters>false</useDefaultDelimiters>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+    <repositories>
+        <!--阿里云仓库-->
+        <repository>
+            <id>aliyun</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+        <!--快照版本使用,正式版本无需添加此仓库-->
+        <repository>
+            <id>snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+        <!-- zh maven -->
+        <repository>
+            <id>vortex</id>
+            <url>http://maven.envcloud.com.cn:8081/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+
+</project>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.warning.WarningRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.warning.WarningRecord">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="status" property="status" />
+        <result column="warning_degree" property="warningDegree" />
+        <result column="warning_time" property="warningTime" />
+        <result column="site_id" property="siteId" />
+        <result column="warningContent" property="warningContent"/>
+        <result column="is_deleted" property="deleted" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, status, warning_degree, warning_time, site_id, is_deleted, create_time, update_time
+    </sql>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseDtoResultMap" type="com.zh.dto.warning.WarningRecordDTO">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="status" property="status" />
+        <result column="warningDegreeName" property="warningDegreeName" />
+        <result column="warning_time" property="warningTime" />
+        <result column="siteId" property="siteId" />
+        <result column="warningContent" property="warningContent"/>
+        <result column="areaCode" property="areaCode"/>
+        <result column="areaName" property="areaName"/>
+        <result column="siteName" property="siteName"/>
+        <result column="warningDegreeId" property="warningDegreeId"/>
+        <result column="warningStatus" property="warningStatus"/>
+        <result column="icon" property="icon"/>
+        <result column="factorCode" property="factorCode"/>
+        <result column="latitude" property="latitude"/>
+        <result column="longitude" property="longitude"/>
+        <result column="photo" property="photo"/>
+        <result column="jump" property="jump"/>
+        <result column="responseJump" property="responseJump"/>
+        <result column="normalValue" property="normalValue"/>
+        <result column="alarmValue" property="alarmValue"/>
+        <result column="factorName" property="factorName"/>
+        <result column="factorUnit" property="factorUnit"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="BaseDto_Column_List">
+        wr.id, wr.name, wr.status, wr.warning_degree, wr.warning_time, wr.site_id,wr.jump,
+        s.id siteId,s.name siteName,s.latitude,s.longitude,s.photo, wd.name warningDegreeName,wd.id warningDegreeId,
+        wd.icon icon,bad.division_name areaName,bad.division_code areaCode,
+        wr.warning_content warningContent,wt.name warningStatus,rr.jump responseJump,
+        wr.warning_value normalValue,wr.data_value alarmValue,f.factor_name factorName,
+         f.factor_unit factorUnit,df.factor_code factorCode
+    </sql>
+
+
+
+    <select id="selectAllWarnRecord" resultMap="BaseDtoResultMap">
+
+        select
+        <include refid="BaseDto_Column_List"/>
+        from warning_record wr
+        LEFT JOIN site s on wr.site_id=s.id and s.is_deleted=0
+        LEFT JOIN device_factor df on df.factor_code=wr.factor_code and df.is_deleted=0
+        LEFT JOIN factor f on df.factor_id=f.id and f.is_deleted=0
+        left JOIN warning_degree wd on wr.warning_degree=wd.id and wd.is_deleted=0
+        left JOIN basic_administrative_division bad on s.area_code=bad.division_code and bad.is_deleted=0
+        left join warning_status wt on wr.status=wt."value" and wt.is_deleted=0
+        LEFT JOIN response_record rr on rr.warning_record_id=wr.id and rr.is_deleted=0
+
+        where wr.is_deleted=0 and( wr.status IN (1,2,3,5))
+
+        <if test="value!=null">
+            and  wt."value"=#{value}
+        </if>
+        <if test="startTime!=null and endTime!=null">
+            and  wr.warning_time BETWEEN #{startTime} AND #{endTime}
+        </if>
+        <if test="areaCode!=null and!'' == areaCode">
+            and bad.division_code = #{areaCode}
+        </if>
+        <if test="keywords!= null and '' != keywords">
+            <bind name="keywords" value="'%'+keywords+'%'"/>
+            and CONCAT(wr.name,wt.name,wd.name,s.name,bad.division_name,bad.division_code) like #{keywords}
+        </if>
+
+      order by  wr.warning_time desc
+
+    </select>
+
+</mapper>

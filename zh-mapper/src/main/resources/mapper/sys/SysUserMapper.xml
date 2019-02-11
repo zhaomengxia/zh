@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.sys.SysUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.sys.SysUser">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="mobile" property="mobile" />
+        <result column="email" property="email" />
+        <result column="birthday" property="birthday" />
+        <result column="education" property="education" />
+        <result column="gender" property="gender" />
+        <result column="profession" property="profession" />
+        <result column="photo" property="photo" />
+        <result column="college" property="college" />
+        <result column="urgent_person" property="urgentPerson" />
+        <result column="urgent_contact" property="urgentContact" />
+        <result column="is_deleted" property="deleted" />
+        <result column="insert_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="password" property="password" />
+    </resultMap>
+
+    <!-- 用户列表 (包含角色、部门)-->
+    <resultMap id="UserListResultMap" type="com.zh.dto.sys.user.SysUserShowDTO">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="mobile" property="mobile" />
+        <result column="email" property="email" />
+        <result column="birthday" property="birthday" />
+        <result column="education" property="education" />
+        <result column="gender" property="gender" />
+        <result column="profession" property="profession" />
+        <result column="photo" property="photo" />
+        <result column="college" property="college" />
+        <result column="urgent_person" property="urgentPerson" />
+        <result column="urgent_contact" property="urgentContact" />
+        <collection property="roles" ofType="com.zh.entity.sys.SysRoles">
+            <id column="sId" property="id" />
+            <result column="role_name" property="roleName" />
+        </collection>
+
+    </resultMap>
+
+    <!-- 用户登陆 -->
+    <resultMap id="userRoleResourcesResultMap" type="com.zh.entity.sys.SysUser">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="mobile" property="mobile" />
+        <result column="email" property="email" />
+        <result column="birthday" property="birthday" />
+        <result column="education" property="education" />
+        <result column="gender" property="gender" />
+        <result column="profession" property="profession" />
+        <result column="photo" property="photo" />
+        <result column="college" property="college" />
+        <result column="urgent_person" property="urgentPerson" />
+        <result column="urgent_contact" property="urgentContact" />
+        <result column="is_deleted" property="deleted" />
+        <result column="password" property="password"/>
+       <collection property="basicDivisionOrganizations" ofType="com.zh.entity.basic.BasicDivisionOrganization">
+           <result column="bid" property="id"/>
+           <result column="divisionName" property="divisionName"/>
+       </collection>
+        <collection property="roles" ofType="com.zh.entity.sys.SysRoles">
+            <id column="r_ID" property="id" />
+            <result column="role_name" property="roleName" />
+            <result column="description" property="description" />
+            <collection property="resources" ofType="com.zh.entity.sys.SysResources">
+                <id column="rs_ID" property="id" />
+                <result column="name" property="name" />
+                <result column="description" property="description" />
+                <result column="http_path" property="httpPath" />
+                <result column="hasPersission" property="hasPersission" />
+            </collection>
+        </collection>
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, mobile, email,  position, division_id, organization_id, birthday, education, gender, profession, photo, college, urgent_person, urgent_contact, is_deleted, create_time, update_time, password
+    </sql>
+
+    <sql id="User_Column_List">
+        su.id,
+        su.name,
+        su.mobile,
+        su.email,
+        su.position,
+        su.birthday,
+        su.education,
+        su.gender,
+        su.profession,
+        su.photo,
+        su.college,
+        su.urgent_person,
+        su.urgent_contact,
+        sr.id sId,
+        sr.role_name
+    </sql>
+
+    <!-- 用户-角色-资源 结果列 -->
+    <sql id="User_Roles_Resources_Column_List">
+        su.id,
+        su.name,
+        su.mobile,
+        su.email,
+        su.position,
+        su.division_id,
+        su.organization_id,
+        su.birthday,
+        su.education,
+        su.gender,
+        su.profession,
+        su.photo,
+        su.college,
+        su.urgent_person,
+        su.urgent_contact,
+        su.password,
+        su.is_deleted,
+        sur.id,
+        sur.sys_user_id,
+        sur.sys_roles_id,
+        sr.id,
+        sr.role_name,
+        sr.description,
+        srs.id,
+        srs.sys_roles_id,
+        srs.sys_resources_id,
+        srr.id,
+        srr.name,
+        srr.description,
+        srr.http_path,
+        sr.id  r_id,
+        sr.role_name,
+        sr.description,
+        srr.id rs_id,
+        srr.name,
+        srr.description,
+        srr.http_path,
+        srs.has_persission hasPersission,
+        bdo.division_name divisionName,
+         bdo.id bid
+    </sql>
+
+    <select id="findByUserName" resultMap="userRoleResourcesResultMap">
+        select <include refid="User_Roles_Resources_Column_List"/>
+        FROM sys_user su
+        INNER JOIN sys_user_roles sur
+        ON su.id = sur.sys_user_id
+        INNER JOIN sys_roles sr
+        ON sr.ID = sur.sys_roles_id AND sr.IS_DELETED = 0
+        INNER JOIN sys_roles_resources srs
+        ON srs.sys_roles_id = sr.id
+        INNER JOIN sys_resources srr
+        ON srr.id = srs.sys_resources_id AND srr.IS_DELETED = 0
+        LEFT join user_department ud
+        on su.id=ud.user_id and ud.is_deleted=0
+        LEFT join basic_division_organization bdo
+        on ud.organization_id =bdo.id and bdo.is_deleted=0
+        WHERE su.name = #{username}
+    </select>
+
+    <select id="findByUserMobile" resultMap="userRoleResourcesResultMap">
+        select <include refid="User_Roles_Resources_Column_List"/>
+        FROM
+        sys_user su
+        INNER JOIN sys_user_roles sur
+        ON su.id = sur.sys_user_id
+        INNER JOIN sys_roles sr
+        ON sr.id = sur.sys_roles_id AND sr.is_deleted = 0
+        INNER JOIN sys_roles_resources srs and srs.has_persission = 1
+        ON srs.sys_roles_id = sr.id
+        INNER JOIN sys_resources srr
+        ON srr.ID = srs.sys_resources_id AND srr.is_deleted = 0
+        WHERE
+        su.mobile = #{mobile}
+    </select>
+
+    <select id="selectShowPage" resultMap="UserListResultMap">
+        select <include refid="User_Column_List"/>
+        from sys_user su
+        left join sys_user_roles sur on su.id = sur.sys_user_id
+        left join sys_roles sr on sur.sys_roles_id = sr.id and sr.is_deleted = 0
+        where su.is_deleted = 0
+        <if test="queryDTO.name != null and '' != queryDTO.name">
+            <bind name="name" value="'%'+queryDTO.name+'%'"/>
+            and su.name like #{name}
+        </if>
+        <if test="queryDTO.sysRoleId != null">
+            and sr.id = ${queryDTO.sysRoleId}
+        </if>
+    </select>
+
+    <select id="selectUserInfo" resultMap="UserListResultMap">
+        select <include refid="User_Column_List"/>
+        from sys_user su
+        left join sys_user_roles sur on su.id = sur.sys_user_id
+        left join sys_roles sr on sur.sys_roles_id = sr.id and sr.is_deleted = 0
+        where su.is_deleted = 0
+        and su.id = #{id}
+    </select>
+</mapper>

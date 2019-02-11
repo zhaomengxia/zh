@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.response.ResponseDisasterMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.response.ResponseDisaster">
+        <id column="id" property="id" />
+        <result column="arganization_id" property="arganizationId" />
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime" />
+        <result column="back_time" property="backTime" />
+        <result column="affect_people" property="affectPeople" />
+        <result column="affect_house" property="affectHouse" />
+        <result column="die_people" property="diePeople" />
+        <result column="miss_people" property="missPeople" />
+        <result column="transfer_people" property="transferPeople" />
+        <result column="economic_losses" property="economicLosses" />
+        <result column="warn_record_id" property="warnRecordId" />
+        <result column="is_deleted" property="deleted" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, arganization_id, start_time, end_time, back_time, affect_people, affect_house, die_people, miss_people, transfer_people, economic_losses, warn_record_id, is_deleted, create_time, update_time
+    </sql>
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseDtoResultMap" type="com.zh.dto.response.ResponseDisaterDTO">
+        <id column="id" property="id" />
+        <result column="arganizationId" property="arganizationId" />
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime" />
+        <result column="back_time" property="backTime" />
+        <result column="affect_people" property="affectPeople" />
+        <result column="affect_house" property="affectHouse" />
+        <result column="die_people" property="diePeople" />
+        <result column="miss_people" property="missPeople" />
+        <result column="transfer_people" property="transferPeople" />
+        <result column="economic_losses" property="economicLosses" />
+        <result column="warn_record_id" property="warnRecordId" />
+        <result column="arganizationName" property="arganizationName" />
+        <result column="userId" property="userId"/>
+        <result column="userName" property="userName"/>
+        <result column="feedback" property="feedback"/>
+        <result column="areaCode" property="areaCode"/>
+        <result column="areaName" property="areaName"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="BaseDto_Column_List">
+        rd.id, dbo.id arganizationId, rd.start_time, rd.end_time, rd.back_time, rd.affect_people, rd.affect_house,
+         rd.die_people, rd.miss_people, rd.transfer_people, rd.economic_losses,rd.is_feedback feedback,
+          rd.warn_record_id,dbo.division_name arganizationName,su.name userName,su.id userId,
+          bad.division_code areaCode,bad.division_name areaName
+    </sql>
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseDtoMapResultMap" type="com.zh.dto.response.ResponseDisaterMapDTO">
+        <result column="responseDegreeValue" property="responseDegreeValue"/>
+        <result column="responseStatusValue" property="responseStatusValue"/>
+        <result column="warningDegreeValue" property="warningDegreeValue"/>
+        <result column="responseDegree" property="responseDegree"/>
+        <result column="responseStatus" property="responseStatus"/>
+        <result column="statusValue" property="statusValue"/>
+        <result column="warnRecordId" property="warnRecordId" />
+        <result column="responseJump" property="responseJump"/>
+        <result column="warningJump" property="warningJump"/>
+        <result column="normal" property="normal"/>
+        <result column="address" property="address"/>
+        <result column="areaCode" property="areaCode"/>
+        <result column="areaName" property="areaName"/>
+        <result column="constractionCompany" property="constractionCompany"/>
+        <result column="isFocus" property="isFocus"/>
+        <result column="latitude" property="latitude"/>
+        <result column="longitude" property="longitude"/>
+        <result column="manageCompany" property="manageCompany"/>
+        <result column="photo" property="photo"/>
+        <result column="recordLevel" property="recordLevel"/>
+        <result column="recordTime" property="recordTime"/>
+        <result column="siteCode" property="siteCode"/>
+        <result column="siteId" property="siteId"/>
+        <result column="siteName" property="siteName"/>
+        <result column="status" property="status"/>
+        <result column="telephone" property="telephone"/>
+        <result column="warnId" property="warnId"/>
+        <result column="warningDegreeName" property="warningDegreeName"/>
+        <result column="warningTime" property="warningTime"/>
+        <result column="warnName" property="warnName"/>
+        <result column="normalValue" property="normalValue"/>
+        <result column="alarmValue" property="alarmValue"/>
+        <result column="warningContent" property="warningContent"/>
+        <result column="icon" property="icon"/>
+        <collection property="responseDisaterDTOS" ofType="com.zh.dto.response.ResponseDisaterDTO">
+            <result column="arganizationId" property="arganizationId" />
+            <result column="start_time" property="startTime" />
+            <result column="end_time" property="endTime" />
+            <result column="back_time" property="backTime" />
+            <result column="affect_people" property="affectPeople" />
+            <result column="affect_house" property="affectHouse" />
+            <result column="die_people" property="diePeople" />
+            <result column="miss_people" property="missPeople" />
+            <result column="transfer_people" property="transferPeople" />
+            <result column="economic_losses" property="economicLosses" />
+            <result column="arganizationName" property="arganizationName" />
+            <result column="userId" property="userId"/>
+            <result column="userName" property="userName"/>
+            <result column="feedback" property="feedback"/>
+        </collection>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="BaseDtoMap_Column_List">
+      dbo.id arganizationId,
+        rdd.name responseDegree,wd.icon icon,
+         rt.name responseStatus, rr.response_content responseContent,rr.jump responseJump,s.id siteId,
+        s.name siteName,s.address address,rr.id warnRecordId,
+         s.latitude latitude,s.longitude longitude,
+         s.constraction_company constractionCompany,s.manage_company manageCompany,s.photo photo,
+         s.is_focus isFocus,wr.name warnName,wd.name warningDegreeName,wr.id warnId,wr.warning_time warningTime,
+         wr.warning_value normalValue,wr.data_value alarmValue,wr.warning_content warningContent,
+         rr.id  responseRecordId,  rr.response_status responseStatusValue,
+        rr.response_degree responseDegreeValue,wr.warning_degree warningDegreeValue,wr.status statusValue,ws.name status,
+        rd.start_time, rd.end_time, rd.back_time, rd.affect_people, rd.affect_house,
+        rd.die_people, rd.miss_people, rd.transfer_people, rd.economic_losses,rd.is_feedback feedback,
+        rd.warn_record_id,dbo.division_name arganizationName,su.name userName,su.id userId,
+        bad.division_code areaCode,bad.division_name areaName, wr.jump warningJump, rr.is_normal normal,resd.name responseDegree,rt.name responseStatus
+    </sql>
+
+
+    <select id="selectAllById" resultMap="BaseDtoResultMap">
+        select
+        <include refid="BaseDto_Column_List"/>
+        FROM response_disaster rd
+        LEFT JOIN basic_division_organization dbo on rd.arganization_id=dbo.id and dbo.is_deleted=0
+        LEFT JOIN sys_user su ON rd.user_id=su.id and su.is_deleted=0
+        left join response_disater_record rdr on rd.warn_record_id=rdr.id and rdr.is_deleted=0
+        LEFT JOIN response_record rr on rr.id=rdr.response_record_id and rr.is_deleted=0
+        left JOIN warning_record wr on wr.id=rr.warning_record_id and wr.is_deleted=0
+        LEFT JOIN warning_degree wd ON wr.warning_degree =wd.id and wd.is_deleted=0
+        left JOIN site s on wr.site_id=s.id and s.is_deleted=0
+        LEFT JOIN basic_administrative_division bad on s.area_code=bad.division_code and bad.is_deleted=0
+        WHERE rd.is_deleted=0
+        <if test="f!=null and f == true">
+            and rd.is_feedback = 1
+        </if>
+        <if test="f!=null and f == false">
+            and rd.is_feedback = 0
+        </if>
+
+        <if test="id!=null">
+            and  wr.id=#{id}
+        </if>
+        order by rd.back_time desc
+    </select>
+
+
+    <select id="selectAllMap" resultMap="BaseDtoMapResultMap">
+
+        select
+        <include refid="BaseDtoMap_Column_List"/>
+        FROM warning_record wr
+        LEFT JOIN response_record rr on rr.warning_record_id=wr.id and rr.is_deleted=0
+        left join warning_status ws on wr.status=ws."value" and ws.is_deleted=0
+        left join response_disater_record rdr on rdr.response_record_id=rr.id and rdr.is_deleted=0
+        left JOIN response_disaster rd on rd.warn_record_id=rdr.id and rd.is_deleted=0
+        LEFT JOIN basic_division_organization dbo on rd.arganization_id=dbo.id and dbo.is_deleted=0
+        LEFT JOIN sys_user su ON rd.user_id=su.id and su.is_deleted=0
+        left JOIN site s on wr.site_id=s.id and s.is_deleted=0
+        LEFT JOIN basic_administrative_division bad on s.area_code=bad.division_code and bad.is_deleted=0
+        LEFT JOIN response_degree rdd on rr.response_degree=rdd.status and rdd.is_deleted=0
+        left JOIN warning_degree wd on wr.warning_degree=wd.id and wd.is_deleted=0
+        left JOIN response_type rt on rr.response_status=rt.status and rt.is_deleted=0
+        LEFT JOIN response_degree resd on rr.response_degree=resd.status and resd.is_deleted=0
+        WHERE wr.is_deleted=0 and (wr.status =4) and (rr.response_status =4)
+
+        <if test="f!=null and f == true">
+            and rd.is_feedback = 1
+        </if>
+        <if test="f!=null and f == false">
+            and rd.is_feedback = 0
+        </if>
+
+        <if test="id!=null">
+            and  wr.id=#{id}
+        </if>
+        order by rd.back_time desc
+    </select>
+
+</mapper>

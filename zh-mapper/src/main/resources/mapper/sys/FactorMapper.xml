@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.sys.FactorMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.sys.Factor">
+        <id column="id" property="id" />
+        <result column="device_type" property="deviceType" />
+        <result column="factor_name" property="factorName" />
+        <result column="factor_unit" property="factorUnit" />
+        <result column="is_deleted" property="deleted" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultDtoMap" type="com.zh.dto.sys.site.DeviceTypeAndFactorIdDTO">
+        <id column="id" property="deviceTypeId" />
+        <result column="device_type_name" property="deviceTypeName" />
+        <result column="factor_name" property="factorName" />
+        <result column="factor_id" property="factorId" />
+        <result column="factor_unit" property="factorUnit" />
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, device_type, factor_name, factor_unit, is_deleted, create_time, update_time
+    </sql>
+    <select id="getSiteFactor" resultType="com.zh.dto.warning.SiteFactorDTO"></select>
+
+    <!-- 通用查询结果列 -->
+    <sql id="BaseDto_Column_List">
+        f.id factorId,dt.id deviceTypeId,f.factor_name, f.factor_unit, dt.name deviceTypeName
+    </sql>
+
+    <select id="selectByDeviceTypeId" resultType="com.zh.dto.sys.site.DeviceTypeAndFactorIdDTO">
+        select <include refid="BaseDto_Column_List"/>
+        from factor f LEFT JOIN device_type dt on f.device_type=dt.id
+        where f.is_deleted=0 and dt.is_deleted=0
+
+        <if test="deviceTypeId != null">
+            <bind name="deviceTypeId" value="deviceTypeId"/>
+            and dt.id = #{deviceTypeId}
+        </if>
+
+    </select>
+
+</mapper>

@@ -1,0 +1,54 @@
+#自定义的属性，指定了一个路径，注意要以/结尾
+file:
+  upload-path: /mnt/zh/zh/upload/
+server:
+  port: 10088
+spring:
+  #文件上传大小限制
+  servlet:
+    multipart:
+      max-file-size: 300MB
+      max-request-size: 300MB
+  application:
+    name: zh-prod
+  kafka:
+    bootstrap-servers: 192.168.16.27:9092
+  datasource:
+    dynamic:
+      primary: sqlserver
+      datasource:
+        #单纯多数据源配置 可配置多个
+        sqlserver:
+          driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+          url: jdbc:sqlserver://192.168.16.35;DatabaseName=bfp-jd
+          username: sa
+          password: vorTex@2018
+          hikari:
+            minimum-idle: 15
+            maximum-pool-size: 15
+            auto-commit: true
+            idle-timeout: 600000
+            max-lifetime: 1800000
+            connection-timeout: 30000
+  redis:
+    host: 192.168.16.15
+    port: 6379
+    database: 7
+    timeout: 60s  # 数据库连接超时时间，2.0 中该参数的类型为Duration，这里在配置的时候需要指明单位
+    # 连接池配置，2.0中直接使用jedis或者lettuce配置连接池
+    jedis:
+      pool:
+        # 最大空闲连接数
+        max-idle: 500
+        # 最小空闲连接数
+        min-idle: 50
+        # 等待可用连接的最大时间，负数为不限制
+        max-wait:  -1s
+        # 最大活跃连接数，负数为不限制
+        max-active: -1
+    password: vortex2016
+
+#线上环境不开启swagger
+swagger:
+  enable: false
+

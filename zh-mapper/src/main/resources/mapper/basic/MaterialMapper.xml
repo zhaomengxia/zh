@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.basic.MaterialMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.basic.Material">
+        <id column="id" property="id" />
+        <result column="material_name" property="materialName" />
+        <result column="material_mount" property="materialMount" />
+        <result column="description" property="description" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_deleted" property="deleted" />
+        <result column="warehourse_id" property="warehourseId" />
+        <result column="unit" property="unit"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, material_name, material_mount, description,  create_time, update_time, is_deleted, warehourse_id,unit
+    </sql>
+    <select id="selectAllByMessage" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM material
+        WHERE IS_DELETED = 0
+
+        <if test="keywords != null and '' != keywords">
+            <bind name="keywords" value="'%'+keywords+'%'"/>
+            and CONCAT(material_name,material_mount, description, warehourse_id,unit) like #{keywords}
+        </if>
+
+        <if test="wareHourseId != null">
+            <bind name="wareHourseId"  value="wareHourseId"/>
+            and warehourse_id = #{wareHourseId}
+        </if>
+        order by create_time desc
+    </select>
+
+</mapper>

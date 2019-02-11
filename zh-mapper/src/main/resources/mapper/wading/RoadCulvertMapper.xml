@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.wading.RoadCulvertMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.wading.RoadCulvert">
+        <id column="id" property="id" />
+        <result column="area_code" property="areaCode" />
+        <result column="name" property="name" />
+        <result column="code" property="code" />
+        <result column="height" property="height" />
+        <result column="width" property="width" />
+        <result column="length" property="length" />
+        <result column="create_time" property="createTime" />
+        <result column="is_deleted" property="deleted" />
+        <result column="update_time" property="updateTime" />
+        <result column="type" property="type" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, area_code, name, code, height, width, length, create_time, is_deleted, update_time, type
+    </sql>
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultDtoMap" type="com.zh.dto.wading.RoadCulvertDTO">
+        <id column="id" property="id" />
+        <result column="areaCode" property="areaCode" />
+        <result column="name" property="name" />
+        <result column="code" property="code" />
+        <result column="height" property="height" />
+        <result column="width" property="width" />
+        <result column="length" property="length" />
+        <result column="areaName" property="areaName" />
+        <result column="type" property="type" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="BaseDto_Column_List">
+        r.id, bad.division_code areaCode, r.name, r.code, r.height, r.width, r.length, bad.division_name areaName, r.type
+    </sql>
+
+    <select id="selectAllByMessage" resultMap="BaseResultDtoMap">
+        select
+        <include refid="BaseDto_Column_List"/>
+        from road_culvert r LEFT JOIN basic_administrative_division bad
+        ON r.area_code=bad.division_code
+        WHERE r.is_deleted=0 and bad.is_deleted=0
+        <if test="keywords != null and '' != keywords">
+            <bind name="keywords" value="'%'+keywords+'%'"/>
+            and CONCAT(r.name,r.code,bad.division_code,r.height, r.width, r.length, bad.division_name,r.type)like #{keywords}
+        </if>
+
+        Order by r.create_time desc
+    </select>
+
+</mapper>
