@@ -24,7 +24,6 @@ public class UndertowConfig {
         factory.addBuilderCustomizers();
         return factory;
     }
-
     @Bean
     public UndertowBuilderCustomizer undertowBuilderCustomizer() {
         return customizer -> {
