@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
  * @author  hahaha
  * @since 2018-09-21 14:21
  * undertow 容器配置类
-
  **/
 @Configuration
 public class UndertowConfig {
