@@ -19,9 +19,8 @@ import java.util.List;
 
 
 /**
- * @author  hahaha
+ * @author hahaha
  * @date 2018-08-06 17:02
-
  **/
 @Configuration
 @EnableSwagger2
