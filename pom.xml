@@ -170,6 +170,12 @@
             <!-- 模板 end-->
 
             <dependency>
+                <groupId></groupId>
+                <artifactId></artifactId>
+            </dependency>
+
+
+            <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
                 <version>${dynamic.version}</version>
