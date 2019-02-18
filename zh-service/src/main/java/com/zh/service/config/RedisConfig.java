@@ -1,4 +1,4 @@
-package com.zh.config;
+package com.zh.service.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
