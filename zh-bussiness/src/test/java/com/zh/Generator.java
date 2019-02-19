@@ -51,7 +51,7 @@ public class Generator {
     }
 
     //项目根路径根据实际路径修改
-    private static String PROJECT_PATH = "E:\\code\\zh";
+    private static String PROJECT_PATH = "D:\\diaodu\\2019 01 11\\zh";
     private static String AUTHOR = " hahaha ";
 
     //代码生成 根据表生成对应实体类、mapper接口、mapper xml、service以及controller

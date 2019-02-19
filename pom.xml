@@ -45,6 +45,8 @@
         <p6spy.version>3.8.0</p6spy.version>
         <!-- 打包跳过测试 -->
         <skipTests>true</skipTests>
+        <aliyun.version>1.0.0</aliyun.version>
+        <aliyuncore.version>4.0.7</aliyuncore.version>
     </properties>
 
     <dependencyManagement>
@@ -168,11 +170,6 @@
                 <version>${velocity.version}</version>
             </dependency>
             <!-- 模板 end-->
-
-            <dependency>
-                <groupId></groupId>
-                <artifactId></artifactId>
-            </dependency>
 
 
             <dependency>
