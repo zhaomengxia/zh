@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.test.SptFallbackDbMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.test.SptFallbackDb">
+        <result column="xserver_name" property="xserverName" />
+        <result column="xdttm_ins" property="xdttmIns" />
+        <result column="xdttm_last_ins_upd" property="xdttmLastInsUpd" />
+        <result column="xfallback_dbid" property="xfallbackDbid" />
+        <result column="name" property="name" />
+        <result column="dbid" property="dbid" />
+        <result column="status" property="status" />
+        <result column="version" property="version" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        xserver_name, xdttm_ins, xdttm_last_ins_upd, xfallback_dbid, name, dbid, status, version
+    </sql>
+
+</mapper>

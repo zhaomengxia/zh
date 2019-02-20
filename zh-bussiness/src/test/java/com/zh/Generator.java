@@ -34,7 +34,8 @@ import java.util.List;
  * @date 2018-08-06 14:34
 
  **/
-@SpringBootTest
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 public class Generator {
 
@@ -42,16 +43,16 @@ public class Generator {
     private DynamicDataSourceProperties dynamicDataSourceProperties;
 
 
-    private DataSourceProperty sqlserver;
+    private DataSourceProperty mysql;
 
 
     @Before
     public void init() {
-        sqlserver = dynamicDataSourceProperties.getDatasource().get("sqlserver");
+        mysql = dynamicDataSourceProperties.getDatasource().get("mysql");
     }
 
     //项目根路径根据实际路径修改
-    private static String PROJECT_PATH = "D:\\diaodu\\2019 01 11\\zh";
+    private static String PROJECT_PATH = "D:\\diaodu\\2019 02 11\\zh";
     private static String AUTHOR = " hahaha ";
 
     //代码生成 根据表生成对应实体类、mapper接口、mapper xml、service以及controller
@@ -77,11 +78,11 @@ public class Generator {
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
 
         //sqlserver 数据表生成
-        dataSourceConfig.setDbType(DbType.SQL_SERVER)
-                .setDriverName(sqlserver.getDriverClassName())
-                .setUrl(sqlserver.getUrl())
-                .setUsername(sqlserver.getUsername())
-                .setPassword(sqlserver.getPassword())
+        dataSourceConfig.setDbType(DbType.MYSQL)
+                .setDriverName(mysql.getDriverClassName())
+                .setUrl(mysql.getUrl())
+                .setUsername(mysql.getUsername())
+                .setPassword(mysql.getPassword())
         ;
         //策略配置  设置is_deleted create_time update_time 自动填充
         List<TableFill> fills = Lists.newArrayList();
@@ -101,10 +102,10 @@ public class Generator {
                 .setColumnNaming(NamingStrategy.underline_to_camel)
                 .setSkipView(true)//是否跳过视图
                 .setTablePrefix("")//表前缀
-                .setInclude("exception_job_attachment");//生成的表
+                .setInclude("orders");//生成的表
         //包名策略配置
         PackageConfig packageConfig = new PackageConfig();
-        String packgeName = StrUtil.DOT + "task"; //自定义子包名称 分组管理
+        String packgeName = StrUtil.DOT + "test2"; //自定义子包名称 分组管理
         packageConfig.setParent("com.zh") //父包名
                 .setModuleName("")
                 .setMapper("mapper" + packgeName) //mapper包名

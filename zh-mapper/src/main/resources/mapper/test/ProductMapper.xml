@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.test.ProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.test.Product">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="sort" property="sort" />
+        <result column="price" property="price" />
+        <result column="oneprice" property="oneprice" />
+        <result column="img" property="img" />
+        <result column="date" property="date" />
+        <result column="sale" property="sale" />
+        <result column="face" property="face" />
+        <result column="body" property="body" />
+        <result column="length" property="length" />
+        <result column="quantity" property="quantity" />
+        <result column="source" property="source" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, sort, price, oneprice, img, date, sale, face, body, length, quantity, source
+    </sql>
+
+</mapper>
