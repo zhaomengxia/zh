@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.test2.ZRolesResourcesMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.test2.ZRolesResources">
+        <result column="id" property="id" />
+        <result column="sys_roles_id" property="sysRolesId" />
+        <result column="sys_resources_id" property="sysResourcesId" />
+        <result column="has_persission" property="hasPersission" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, sys_roles_id, sys_resources_id, has_persission
+    </sql>
+
+</mapper>

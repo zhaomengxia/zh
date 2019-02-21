@@ -52,7 +52,7 @@ public class Generator {
     }
 
     //项目根路径根据实际路径修改
-    private static String PROJECT_PATH = "D:\\diaodu\\2019 02 11\\zh";
+    private static String PROJECT_PATH = "D:\\diaodu\\2019.02.11\\zh";
     private static String AUTHOR = " hahaha ";
 
     //代码生成 根据表生成对应实体类、mapper接口、mapper xml、service以及controller
@@ -102,7 +102,7 @@ public class Generator {
                 .setColumnNaming(NamingStrategy.underline_to_camel)
                 .setSkipView(true)//是否跳过视图
                 .setTablePrefix("")//表前缀
-                .setInclude("orders");//生成的表
+                .setInclude("z_roles","z_resources","z_roles_resources","z_user_roles");//生成的表
         //包名策略配置
         PackageConfig packageConfig = new PackageConfig();
         String packgeName = StrUtil.DOT + "test2"; //自定义子包名称 分组管理

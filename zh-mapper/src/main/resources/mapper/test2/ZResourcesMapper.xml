@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.mapper.test2.ZResourcesMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zh.entity.test2.ZResources">
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="description" property="description" />
+        <result column="http_path" property="httpPath" />
+        <result column="is_deleted" property="deleted" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="parent_id" property="parentId" />
+        <result column="node" property="node" />
+        <result column="layer" property="layer" />
+        <result column="seq" property="seq" />
+        <result column="url" property="url" />
+        <result column="icon" property="icon" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, description, http_path, is_deleted, create_time, update_time, parent_id, node, layer, seq, url, icon
+    </sql>
+
+</mapper>

@@ -31,6 +31,12 @@ public class MainClass {
         extend();
         //找数组中重复元素
         findDupicateInArray();
+        //移除元素
+        remove();
+        //利用removeAll来移除两个数组之间的差集
+        removeAll();
+        //判断两个数组是否相等
+        equals();
 
     }
     //数组填充
@@ -151,4 +157,47 @@ public class MainClass {
         System.arraycopy(original,index,destination,index+1,l-index);
         return destination;
     }
+    //删除数组元素
+    private static void remove(){
+        ArrayList<String> strings=new ArrayList<>();
+        strings.clear();
+        strings.add(0,"第1个元素");
+        strings.add(1,"第二个元素");
+        strings.add(2,"第三个元素");
+        System.out.println(strings+"移除前");
+        strings.remove(0);
+        strings.remove("第二个元素");
+        System.out.println(strings+"移除后");
+    }
+    //使用removeAll()方法来计算两个数组之间的差集
+    private static void removeAll(){
+        ArrayList obj1=new ArrayList();
+        ArrayList obj2=new ArrayList();
+        obj1.add(0,1);
+        obj1.add(1,2);
+        obj1.add(2,3);
+        obj1.add(3,4);
+
+        obj2.add(0,1);
+        obj2.add(1,3);
+
+        System.out.println("两个数组之间的交集"+obj1.retainAll(obj2)+obj1);
+
+        System.out.println("是否包含元素"+obj1.contains(1)+"  ,,..  ");
+        System.out.println(obj1+"移除差集前");
+        obj1.removeAll(obj2);
+        System.out.println(obj1+"移除差集后");
+    }
+    //利用equals方法来判断数组是否相等
+    private static void equals(){
+        int ary[]={1,2,3,4,5,6};
+        int ary1[]={1,2,3,4,5,6};
+        int ary2[]={1,2,3,4,5};
+
+        System.out.println("ary与ary1两个数组是否相等"+Arrays.equals(ary,ary1));
+
+        System.out.println("ary与ary2两个数组是否相等"+Arrays.equals(ary,ary2));
+
+    }
+
 }
