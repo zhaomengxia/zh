@@ -101,7 +101,11 @@ public class ZUserServiceImpl extends ServiceImpl<ZUserMapper, ZUser> implements
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;
+        List<ZUser> zUsers= this.list(new LambdaQueryWrapper<ZUser>().eq(ZUser::getUsername,s));
+        if (zUsers==null){
+            throw new BadCredentialsException(ExceptionEnum.user_not_exist.getMessage());
+        }
+        return permissionFilter(zUsers.get(0));
     }
     public UserDetails permissionFilter(ZUser zUser){
             List<ZRoles> zRoles=zUser.getRoles();
