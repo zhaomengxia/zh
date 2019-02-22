@@ -8,10 +8,7 @@ import com.zh.dto.user.ChangePasswordDTO;
 import com.zh.dto.user.SysUserInertOrUpdateDTO;
 import com.zh.dto.user.SysUserQueryDTO;
 import com.zh.dto.user.SysUserShowDTO;
-import com.zh.entity.test2.ZResources;
-import com.zh.entity.test2.ZRoles;
-import com.zh.entity.test2.ZRolesResources;
-import com.zh.entity.test2.ZUser;
+import com.zh.entity.test2.*;
 import com.zh.enums.ExceptionEnum;
 import com.zh.mapper.test2.ZUserMapper;
 import com.zh.security.userdetails.UserDetailsServiceExpansion;
@@ -51,6 +48,7 @@ public class ZUserServiceImpl extends ServiceImpl<ZUserMapper, ZUser> implements
     private ZRolesResourcesService zRolesResourcesService;
     @Resource
     private ZResourcesService zResourcesService;
+
     //默认用户密码
     private String defaultPassword = "123456";
 
@@ -67,7 +65,17 @@ public class ZUserServiceImpl extends ServiceImpl<ZUserMapper, ZUser> implements
 
     @Override
     public boolean saveOrUpdate(SysUserInertOrUpdateDTO userInertOrUpdateDTO) {
-        return false;
+        //添加用户表
+        ZUser zUser=new ZUser();
+        zUser.setName("meng");
+        zUser.setPassword(passwordEncoder.encode(defaultPassword));
+        this.saveOrUpdate(zUser);
+        //永固角色关联
+        ZUserRoles zUserRoles=new ZUserRoles();
+        zUserRoles.setSysRolesId(1L);
+        zUserRoles.setSysUserId(zUser.getId());
+        zUserRolesService.saveOrUpdate(zUserRoles);
+        return true;
     }
 
     @Override
@@ -92,32 +100,31 @@ public class ZUserServiceImpl extends ServiceImpl<ZUserMapper, ZUser> implements
 
     @Override
     public UserDetails loadUserByUsernameMobile(String mobile) throws UsernameNotFoundException {
-        List<ZUser> zUsers= this.list(new LambdaQueryWrapper<ZUser>().eq(ZUser::getMobile,mobile));
-        if (zUsers==null){
+        ZUser zUser=zUserMapper.findByMobile(mobile);
+        if (zUser==null){
             throw new BadCredentialsException(ExceptionEnum.user_not_exist.getMessage());
         }
-        return permissionFilter(zUsers.get(0));
+        return permissionFilter(zUser);
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        List<ZUser> zUsers= this.list(new LambdaQueryWrapper<ZUser>().eq(ZUser::getUsername,s));
-        if (zUsers==null){
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        ZUser zUser= zUserMapper.findByUserName(username);
+        if (zUser==null){
             throw new BadCredentialsException(ExceptionEnum.user_not_exist.getMessage());
         }
-        return permissionFilter(zUsers.get(0));
+        return permissionFilter(zUser);
     }
     public UserDetails permissionFilter(ZUser zUser){
             List<ZRoles> zRoles=zUser.getRoles();
             for (ZRoles zRoles1:zRoles) {
-                List<ZRolesResources> zRolesResources = zRolesResourcesService.list(new LambdaQueryWrapper<ZRolesResources>()
-                        .eq(ZRolesResources::getSysRolesId, zRoles1.getId()));
-                for (ZRolesResources zRolesResources1:zRolesResources){
-                    if (zRolesResources1.getHasPersission()){
-                        List<ZResources> zResources=zResourcesService.list(new LambdaQueryWrapper<ZResources>().eq(ZResources::getId,zRolesResources1.getSysResourcesId()));
-                        zRoles1.setResources(zResources);
-                    }
-                }
+                List<ZResources> zResources=new ArrayList<>();
+               for (ZResources zResources1:zRoles1.getResources()){
+                   if (zResources1.getHasPersission()) {
+                       zResources.add(zResources1);
+                   }
+               }
+               zRoles1.setResources(zResources);
             }
             return zUser;
     }

@@ -1,14 +1,11 @@
 package com.zh.entity.test2;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
+
 import java.time.LocalDate;
-import com.baomidou.mybatisplus.annotation.Version;
 import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableField;
+
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -44,8 +41,8 @@ public class ZUser implements UserDetails,Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableField("id")
-    private Integer id;
+    @TableId(value = "id", type = IdType.ID_WORKER)
+    protected Long id;
 
     @TableField("name")
     private String name;

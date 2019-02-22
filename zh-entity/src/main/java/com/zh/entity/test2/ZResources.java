@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -76,5 +78,7 @@ public class ZResources implements Serializable {
     @TableField("icon")
     private String icon;
 
-
+    @TableField(exist = false)
+    @JsonIgnore
+    private Boolean hasPersission;
 }

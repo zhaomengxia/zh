@@ -33,14 +33,14 @@ public class ZRolesResources implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableField("id")
-    private Integer id;
+    @TableId("id")
+    private Long id;
 
     @TableField("sys_roles_id")
-    private Integer sysRolesId;
+    private Long sysRolesId;
 
     @TableField("sys_resources_id")
-    private Integer sysResourcesId;
+    private Long sysResourcesId;
 
     @TableField("has_persission")
     private Boolean hasPersission;

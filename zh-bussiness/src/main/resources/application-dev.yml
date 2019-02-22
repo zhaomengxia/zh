@@ -51,6 +51,8 @@ spring:
             idle-timeout: 600000
             max-lifetime: 1800000
             connection-timeout: 30000
+  main:
+    allow-bean-definition-overriding: true
   redis:
     host: localhost
     port: 30001

@@ -1,13 +1,8 @@
 package com.zh.entity.test2;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.Version;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import java.util.List;
 
@@ -39,8 +34,8 @@ public class ZRoles implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableField("id")
-    private Integer id;
+    @TableId("id")
+    private Long id;
 
     @TableField("role_name")
     private String roleName;

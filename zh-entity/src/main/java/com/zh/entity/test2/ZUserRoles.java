@@ -33,14 +33,14 @@ public class ZUserRoles implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableField("id")
-    private Integer id;
+    @TableId("id")
+    private Long id;
 
     @TableField("sys_user_id")
-    private Integer sysUserId;
+    private Long sysUserId;
 
     @TableField("sys_roles_id")
-    private Integer sysRolesId;
+    private Long sysRolesId;
 
 
 }
