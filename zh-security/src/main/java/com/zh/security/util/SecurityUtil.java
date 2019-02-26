@@ -66,7 +66,7 @@ public class SecurityUtil {
      * @Description 获取请求ip
      * @since 2018/12/17 17:12
      **/
-    private static String getIpAddress(HttpServletRequest request) {
+    public static String getIpAddress(HttpServletRequest request) {
         String xIp = request.getHeader("X-Real-IP");
         String xFor = request.getHeader("X-Forwarded-For");
         if (StringUtils.isNotEmpty(xFor) && !"unKnown".equalsIgnoreCase(xFor)) {

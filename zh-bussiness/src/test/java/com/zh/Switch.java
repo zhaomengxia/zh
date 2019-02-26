@@ -1,13 +1,16 @@
 package com.zh;
 
+import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Arrays;
 
 /**
  * @Author: Zhao MengXia
@@ -93,7 +96,30 @@ public class Switch {
 //                System.out.println("default");
 //                break;
 //        }
-        aesEncode("root");
+//        aesEncode("root");
+        int[] list={2,9,9,7,1,9,0,2,6,8};
+
+        int temp=0;
+        for (int i=0;i<list.length-1;i++){
+            boolean f=false;
+            for (int j=list.length-1;j>i;j--){
+                if (list[j-1]>list[j]){
+                    temp=list[j];
+                    list[j]=list[j-1];
+                    list[j-1]=temp;
+                    f=true;
+                }
+            }
+            if (f==false)
+                break;
+            System.out.println("第"+i+"趟"+ Arrays.toString(list));
+        }
+
+        for (int c=0;c<=10;c++) {
+            System.out.printf("Fib of %d is %d\n",c,fib((long) c));
+            System.out.printf("Fac of %d! = %d\n",c,fac((long) c));
+        }
+
     }
 
     public static String aesEncode(String content) {
@@ -146,5 +172,90 @@ public class Switch {
 
 
 
+    /**
+     * 解密
+     * 解密过程：
+     * 1.同加密1-4步
+     * 2.将加密后的字符串反纺成byte[]数组
+     * 3.将加密内容解密
+     */
+    public static String aesDecode(String content) {
+        try {
+            //1.构造密钥生成器，指定为AES算法,不区分大小写
+            KeyGenerator keygen = KeyGenerator.getInstance("AES");
+            //2.根据ecnodeRules规则初始化密钥生成器
+            //生成一个128位的随机源,根据传入的字节数组
+            SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+            random.setSeed(ENCODE_RULES.getBytes());
+            keygen.init(128, random);
+            //3.产生原始对称密钥
+            SecretKey originalKey = keygen.generateKey();
+            //4.获得原始对称密钥的字节数组
+            byte[] raw = originalKey.getEncoded();
+            //5.根据字节数组生成AES密钥
+            SecretKey key = new SecretKeySpec(raw, "AES");
+            //6.根据指定算法AES自成密码器
+            Cipher cipher = Cipher.getInstance("AES");
+            //7.初始化密码器，第一个参数为加密(Encrypt_mode)或者解密(Decrypt_mode)操作，第二个参数为使用的KEY
+            cipher.init(Cipher.DECRYPT_MODE, key);
+            //8.将加密并编码后的内容解码成字节数组
+            byte[] byteContent = new BASE64Decoder().decodeBuffer(content);
+            /*
+             * 解密
+             */
+            byte[] byteDecode = cipher.doFinal(byteContent);
+            String aesDecode = new String(byteDecode, "utf-8");
+            return aesDecode;
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            throw new RuntimeException("兄弟，配置文件中的密码需要使用AES加密，请使用com.zheng.common.util.AESUtil工具类修改这些值！");
+            //e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        }
+        //如果有错就返加nulll
+        return null;
+    }
+//    public static void main(String[] args) {
+//        String[] keys = {
+//                "", "root"
+//        };
+//        System.out.println("key | AESEncode | AESDecode");
+//        for (String key : keys) {
+//            System.out.print(key + " | ");
+//            String encryptString = aesEncode(key);
+//            System.out.print(encryptString + " | ");
+//            String decryptString = aesDecode(encryptString);
+//            System.out.println(decryptString);
+//        }
+//    }
+
+
+
+    public static long fib(Long number){
+        if ((number==0)||(number==1)){
+            return number;
+        }
+        else{
+            return fib(number-1)+fib(number-2);
+        }
+
+    }
+
+    public static long fac(Long number){
+        if ((number==0)||(number==1)){
+            return 1;
+        }
+        else {
+            return fac(number-1)*number;
+        }
+    }
 
 }

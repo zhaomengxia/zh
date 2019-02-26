@@ -102,10 +102,10 @@ public class Generator {
                 .setColumnNaming(NamingStrategy.underline_to_camel)
                 .setSkipView(true)//是否跳过视图
                 .setTablePrefix("")//表前缀
-                .setInclude("z_roles","z_resources","z_roles_resources","z_user_roles");//生成的表
+                .setInclude("act_evt_log");//生成的表
         //包名策略配置
         PackageConfig packageConfig = new PackageConfig();
-        String packgeName = StrUtil.DOT + "test2"; //自定义子包名称 分组管理
+        String packgeName = StrUtil.DOT + "log"; //自定义子包名称 分组管理
         packageConfig.setParent("com.zh") //父包名
                 .setModuleName("")
                 .setMapper("mapper" + packgeName) //mapper包名

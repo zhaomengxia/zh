@@ -112,27 +112,37 @@ public class ZUser implements UserDetails,Serializable {
     }
 
     @Override
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
     public String getUsername() {
-        return null;
+        return name;
     }
 
     @Override
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

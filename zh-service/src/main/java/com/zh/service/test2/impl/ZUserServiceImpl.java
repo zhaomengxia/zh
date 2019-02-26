@@ -67,8 +67,9 @@ public class ZUserServiceImpl extends ServiceImpl<ZUserMapper, ZUser> implements
     public boolean saveOrUpdate(SysUserInertOrUpdateDTO userInertOrUpdateDTO) {
         //添加用户表
         ZUser zUser=new ZUser();
-        zUser.setName("meng");
+        zUser.setName("haha");
         zUser.setPassword(passwordEncoder.encode(defaultPassword));
+        zUser.setMobile("13588195082");
         this.saveOrUpdate(zUser);
         //永固角色关联
         ZUserRoles zUserRoles=new ZUserRoles();
@@ -113,6 +114,7 @@ public class ZUserServiceImpl extends ServiceImpl<ZUserMapper, ZUser> implements
         if (zUser==null){
             throw new BadCredentialsException(ExceptionEnum.user_not_exist.getMessage());
         }
+        UserDetails userDetails=permissionFilter(zUser);
         return permissionFilter(zUser);
     }
     public UserDetails permissionFilter(ZUser zUser){
