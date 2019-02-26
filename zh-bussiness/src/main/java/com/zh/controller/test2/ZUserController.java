@@ -1,5 +1,6 @@
 package com.zh.controller.test2;
 
+import com.zh.aop.annotation.Log;
 import com.zh.api.Result;
 import com.zh.dto.user.SysUserInertOrUpdateDTO;
 import com.zh.service.test2.ZUserService;
@@ -26,6 +27,7 @@ public class ZUserController {
 
     @ApiOperation(value = "添加或修改用户信息")
     @PostMapping("/saveOrUpdate")
+    @Log(desc = "添加或编辑用户")
     public Result saveOrUpdate(SysUserInertOrUpdateDTO userInertOrUpdateDTO){
       return Result.success(zUserService.saveOrUpdate(userInertOrUpdateDTO));
     }
