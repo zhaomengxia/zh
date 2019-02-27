@@ -1,6 +1,12 @@
 server:
   servlet:
     context-path: /zh
+
+#指定当前启动环境
+#spring:
+#  profiles:
+#    active: @package.environment@
+#下面默认是启动dev 开发环境
 spring:
   profiles:
     active: dev

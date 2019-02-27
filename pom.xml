@@ -255,4 +255,29 @@
         </repository>
     </repositories>
 
+    <!-- 用profile来定义开发、测试、生产三个不同的环境-->
+    <!--<profiles>-->
+        <!--<profile>-->
+            <!--<id>dev</id>-->
+            <!--<activation>-->
+                <!--<activeByDefault>true</activeByDefault>-->
+            <!--</activation>-->
+            <!--<properties>-->
+                <!--<package.environment>dev</package.environment>-->
+            <!--</properties>-->
+        <!--</profile>-->
+        <!--<profile>-->
+            <!--<id>prod</id>-->
+            <!--<properties>-->
+                <!--<package.environment>prod</package.environment>-->
+            <!--</properties>-->
+        <!--</profile>-->
+        <!--<profile>-->
+            <!--<id>test</id>-->
+            <!--<properties>-->
+                <!--<package.environment>test</package.environment>-->
+            <!--</properties>-->
+        <!--</profile>-->
+    <!--</profiles>-->
+
 </project>
