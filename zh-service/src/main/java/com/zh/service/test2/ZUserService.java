@@ -9,6 +9,8 @@ import com.zh.dto.user.SysUserShowDTO;
 import com.zh.entity.test2.ZUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -33,4 +35,6 @@ public interface ZUserService extends IService<ZUser> {
     boolean changePassword(ChangePasswordDTO changePasswordDTO);
 
     boolean resetPassword(Long id);
+
+    void exportUser(HttpServletResponse response)throws IOException;
 }

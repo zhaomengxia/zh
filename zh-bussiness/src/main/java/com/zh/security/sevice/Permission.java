@@ -13,7 +13,7 @@ public interface Permission {
      * @param request        请求对象
      * @param authentication 认证对象
      * @return 能否访问
-     * @author 唐国翔
+     * @author hahaha
      * @Description 拦截登陆用户所能访问的url
      * @since 2018/11/8 14:06
      **/

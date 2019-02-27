@@ -3,12 +3,17 @@ package com.zh.controller.test2;
 import com.zh.aop.annotation.Log;
 import com.zh.api.Result;
 import com.zh.dto.user.SysUserInertOrUpdateDTO;
+import com.zh.enums.ExceptionEnum;
+import com.zh.exceptions.UnifiedException;
 import com.zh.service.test2.ZUserService;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 
 /**
@@ -31,6 +36,18 @@ public class ZUserController {
     public Result saveOrUpdate(SysUserInertOrUpdateDTO userInertOrUpdateDTO){
       return Result.success(zUserService.saveOrUpdate(userInertOrUpdateDTO));
     }
+    @ApiOperation(value = "导出用户信息")
+    @GetMapping
+    @Log(desc = "导出用户信息")
+    public void exportUser(HttpServletResponse response){
+        try {
+            zUserService.exportUser(response);
+        } catch (IOException e) {
+            throw new UnifiedException(ExceptionEnum.EXCEL_EXPORT_FAIL);
+        }
+    }
+
+
 
 }
 

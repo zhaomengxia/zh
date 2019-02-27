@@ -24,7 +24,7 @@ public class Switch {
      * switch case 语句判断一个变量与一系列值中的某个值是否相等，每个值称为一个分支
      * @param args
      */
-    public static void main(String args[]){
+//    public static void main(String args[]){
     //switch语句可以包含一个default分支，该分支一般是switch语句的最后一个分支（可以在任何位置，但建议在最后一个）
         //default在没有case语句的值和变量值相等的时候执行。default分支不需要break语句
 //            char grade='B';
@@ -97,30 +97,30 @@ public class Switch {
 //                break;
 //        }
 //        aesEncode("root");
-        int[] list={2,9,9,7,1,9,0,2,6,8};
-
-        int temp=0;
-        for (int i=0;i<list.length-1;i++){
-            boolean f=false;
-            for (int j=list.length-1;j>i;j--){
-                if (list[j-1]>list[j]){
-                    temp=list[j];
-                    list[j]=list[j-1];
-                    list[j-1]=temp;
-                    f=true;
-                }
-            }
-            if (f==false)
-                break;
-            System.out.println("第"+i+"趟"+ Arrays.toString(list));
-        }
-
-        for (int c=0;c<=10;c++) {
-            System.out.printf("Fib of %d is %d\n",c,fib((long) c));
-            System.out.printf("Fac of %d! = %d\n",c,fac((long) c));
-        }
-
-    }
+//        int[] list={2,9,9,7,1,9,0,2,6,8};
+//
+//        int temp=0;
+//        for (int i=0;i<list.length-1;i++){
+//            boolean f=false;
+//            for (int j=list.length-1;j>i;j--){
+//                if (list[j-1]>list[j]){
+//                    temp=list[j];
+//                    list[j]=list[j-1];
+//                    list[j-1]=temp;
+//                    f=true;
+//                }
+//            }
+//            if (f==false)
+//                break;
+//            System.out.println("第"+i+"趟"+ Arrays.toString(list));
+//        }
+//
+//        for (int c=0;c<=10;c++) {
+//            System.out.printf("Fib of %d is %d\n",c,fib((long) c));
+//            System.out.printf("Fac of %d! = %d\n",c,fac((long) c));
+//        }
+//
+//    }
 
     public static String aesEncode(String content) {
         try {
@@ -223,19 +223,19 @@ public class Switch {
         //如果有错就返加nulll
         return null;
     }
-//    public static void main(String[] args) {
-//        String[] keys = {
-//                "", "root"
-//        };
-//        System.out.println("key | AESEncode | AESDecode");
-//        for (String key : keys) {
-//            System.out.print(key + " | ");
-//            String encryptString = aesEncode(key);
-//            System.out.print(encryptString + " | ");
-//            String decryptString = aesDecode(encryptString);
-//            System.out.println(decryptString);
-//        }
-//    }
+    public static void main(String[] args) {
+        String[] keys = {
+                "", "root"
+        };
+        System.out.println("key | AESEncode | AESDecode");
+        for (String key : keys) {
+            System.out.print(key + " | ");
+            String encryptString = aesEncode(key);
+            System.out.print(encryptString + " | ");
+            String decryptString = aesDecode(encryptString);
+            System.out.println(decryptString);
+        }
+    }
 
 
 

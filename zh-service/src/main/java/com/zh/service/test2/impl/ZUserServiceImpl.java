@@ -17,6 +17,7 @@ import com.zh.service.test2.ZRolesResourcesService;
 import com.zh.service.test2.ZUserRolesService;
 import com.zh.service.test2.ZUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zh.util.file.excel.ExcelHelper;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,6 +25,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +51,8 @@ public class ZUserServiceImpl extends ServiceImpl<ZUserMapper, ZUser> implements
     private ZRolesResourcesService zRolesResourcesService;
     @Resource
     private ZResourcesService zResourcesService;
-
+    @Resource
+    private ZUserService zUserService;
     //默认用户密码
     private String defaultPassword = "123456";
 
@@ -97,6 +101,12 @@ public class ZUserServiceImpl extends ServiceImpl<ZUserMapper, ZUser> implements
     @Override
     public boolean resetPassword(Long id) {
         return false;
+    }
+
+    @Override
+    public void exportUser(HttpServletResponse httpServletResponse) throws IOException {
+        List<ZUser> zUsers=zUserService.list();
+        ExcelHelper.exportExcel(httpServletResponse,"用户","用户",ZUser.class,zUsers);
     }
 
     @Override
