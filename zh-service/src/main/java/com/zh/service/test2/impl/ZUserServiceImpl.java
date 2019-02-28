@@ -1,12 +1,11 @@
 package com.zh.service.test2.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zh.api.Result;
-import com.zh.dto.user.ChangePasswordDTO;
-import com.zh.dto.user.SysUserInertOrUpdateDTO;
-import com.zh.dto.user.SysUserQueryDTO;
-import com.zh.dto.user.SysUserShowDTO;
+import com.zh.dto.user.*;
 import com.zh.entity.test2.*;
 import com.zh.enums.ExceptionEnum;
 import com.zh.mapper.test2.ZUserMapper;
@@ -16,6 +15,7 @@ import com.zh.service.test2.ZRolesResourcesService;
 import com.zh.service.test2.ZUserRolesService;
 import com.zh.service.test2.ZUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zh.util.HttpRequest;
 import com.zh.util.file.excel.ExcelHelper;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
@@ -586,6 +586,37 @@ public class ZUserServiceImpl extends ServiceImpl<ZUserMapper, ZUser> implements
 //        }
         return null;
     }
+
+//    @Override
+    public Result<?> getSpecialistName(String paras) {
+        if (paras==null){
+            paras="";//参数
+        }
+        //这里的url
+        String urls="http://114.55.41.77:8000/Common.aspx";
+        List<GetSpecialistNameDTO> getSpecialistNameDTOList = new ArrayList<>();
+        String htmlStr = HttpRequest.sendGet(urls,
+                "method=GetJson&methodName=GetSpecialistName&paras=" + paras);
+//
+        //把json文本parse成JSONObject
+        JSONObject parse = (JSONObject) JSON.parse(htmlStr);
+        //将javaBean序列化为JSON文本
+        String data = JSON.toJSONString(parse.get("Data"));
+        JSONObject parse1 = (JSONObject) JSON.parse(data);
+        String list = JSON.toJSONString(parse1.get("list"));
+    //转为list对象，并将所需信息放到该对象的list中
+        List<? extends GetSpecialistNameDTO> mengs = JSON.parseArray(list, GetSpecialistNameDTO.class);
+        for (GetSpecialistNameDTO meng1 :
+                mengs) {
+            GetSpecialistNameDTO getSpecialistNameDTO = new GetSpecialistNameDTO();
+            getSpecialistNameDTO.setID(meng1.getID());
+            getSpecialistNameDTO.setQX_NAME(meng1.getQX_NAME());
+            getSpecialistNameDTOList.add(getSpecialistNameDTO);
+        }
+//
+        return Result.success(getSpecialistNameDTOList);
+    }
+
     private HSSFCellStyle createNormalStyle(HSSFWorkbook workbook) {
         HSSFCellStyle setBorder = workbook.createCellStyle();
         HSSFCellStyle result = workbook.createCellStyle();
