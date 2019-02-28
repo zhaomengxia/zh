@@ -5,15 +5,20 @@ import com.zh.api.Result;
 import com.zh.dto.user.SysUserInertOrUpdateDTO;
 import com.zh.enums.ExceptionEnum;
 import com.zh.exceptions.UnifiedException;
+import com.zh.service.excel.ImportService;
 import com.zh.service.test2.ZUserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 
 
 /**
@@ -30,14 +35,16 @@ public class ZUserController {
     @Resource
     private ZUserService zUserService;
 
+    @Resource
+    private ImportService importService;
     @ApiOperation(value = "添加或修改用户信息")
     @PostMapping("/saveOrUpdate")
     @Log(desc = "添加或编辑用户")
-    public Result saveOrUpdate(SysUserInertOrUpdateDTO userInertOrUpdateDTO){
-      return Result.success(zUserService.saveOrUpdate(userInertOrUpdateDTO));
+    public Result saveOrUpdate(SysUserInertOrUpdateDTO userInertOrUpdateDTO,MultipartFile multipartFile, HttpServletRequest request) throws IOException {
+      return Result.success(zUserService.saveOrUpdateUser(userInertOrUpdateDTO,multipartFile,request));
     }
     @ApiOperation(value = "导出用户信息")
-    @GetMapping
+    @GetMapping("/exportUser")
     @Log(desc = "导出用户信息")
     public void exportUser(HttpServletResponse response){
         try {
@@ -47,6 +54,23 @@ public class ZUserController {
         }
     }
 
+    @ApiOperation(value = "导入用户信息")
+    @PostMapping("/importUser")
+    @Log(desc = "导入用户信息")
+    public void importUser(MultipartFile file){
+        try {
+            importService.importUser(file.getInputStream());
+        } catch (IOException e) {
+            throw new UnifiedException(ExceptionEnum.EXCEL_IMPORT_FAIL);
+        }
+    }
+
+    @ApiOperation(value = "导出用户信息2")
+    @RequestMapping("/export")
+    @Log(desc = "导出用户信息")
+    public void export(){
+
+    }
 
 
 }

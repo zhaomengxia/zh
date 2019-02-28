@@ -24,7 +24,7 @@ public class Switch {
      * switch case 语句判断一个变量与一系列值中的某个值是否相等，每个值称为一个分支
      * @param args
      */
-//    public static void main(String args[]){
+    public static void main(String args[]){
     //switch语句可以包含一个default分支，该分支一般是switch语句的最后一个分支（可以在任何位置，但建议在最后一个）
         //default在没有case语句的值和变量值相等的时候执行。default分支不需要break语句
 //            char grade='B';
@@ -119,8 +119,9 @@ public class Switch {
 //            System.out.printf("Fib of %d is %d\n",c,fib((long) c));
 //            System.out.printf("Fac of %d! = %d\n",c,fac((long) c));
 //        }
-//
-//    }
+        breakfor();
+        continuefor();
+    }
 
     public static String aesEncode(String content) {
         try {
@@ -223,21 +224,64 @@ public class Switch {
         //如果有错就返加nulll
         return null;
     }
-    public static void main(String[] args) {
+
+    /**
+     * 加密解密
+     * @return
+     */
+    public static String aes() {
         String[] keys = {
                 "", "root"
         };
         System.out.println("key | AESEncode | AESDecode");
+        String encryptString ="";
+        String decryptString="";
         for (String key : keys) {
             System.out.print(key + " | ");
-            String encryptString = aesEncode(key);
+            encryptString = aesEncode(key);
             System.out.print(encryptString + " | ");
-            String decryptString = aesDecode(encryptString);
+            decryptString = aesDecode(encryptString);
             System.out.println(decryptString);
+        }
+      return encryptString+"....."+decryptString;
+    }
+
+    /**
+     * for  循环里的break关键字
+     */
+    public  static void  breakfor(){
+        int numbers[]={1,2,3,4,5,6,7,8,9};
+
+        for (Integer integer:numbers){
+            if (integer==5){
+                break;
+            }
+            System.out.print(integer);
+            System.out.print(" ");
+        }
+
+    }
+
+    /**
+     * for循环中的continue关键字
+     */
+    public static void continuefor(){
+        int numbers[]={1,2,3,4,5,6,7,8,9,10};
+        for (int x:numbers){
+            if (x==6){
+                continue;
+            }
+            System.out.print(x);
+            System.out.print(" ");
         }
     }
 
 
+    /**
+     * 斐波那契数列
+     * @param number
+     * @return
+     */
 
     public static long fib(Long number){
         if ((number==0)||(number==1)){
@@ -248,6 +292,12 @@ public class Switch {
         }
 
     }
+
+    /**
+     * 阶乘
+     * @param number
+     * @return
+     */
 
     public static long fac(Long number){
         if ((number==0)||(number==1)){

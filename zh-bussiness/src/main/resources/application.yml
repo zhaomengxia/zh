@@ -2,6 +2,15 @@ server:
   servlet:
     context-path: /zh
 
+  #https 配置，在生产中使用https  具体解释https ：传输层安全性（TLS）是HTTPS的官方名称，也可能听过它为SSL（安全套接字层），SSL这个名称已经被弃用，TLS是一种加密协议，通过计算机网络提供安全通信
+  #主要目标确保计算机应用程序之间的隐私和数据的完整性 下面这段就够了
+#  port: 443
+#  ssl:
+#    key-store: classpath:keystore.p12
+#    key-store-password: 123456
+#    key-store-type: PKCS12
+#    key-alias: zh
+
 #指定当前启动环境
 #spring:
 #  profiles:
@@ -18,6 +27,19 @@ spring:
     timeout: 3600
     redis:
       namespace: zh-session
+#使用OpenID Connect进行身份验证如果使用OIDC进行身份验证，则无需担心如何存储用户、密码或对用户进行身份验证。
+#相反，你可以使用身份提供商（IdP）为你执行此操作，你的IdP甚至可能提供多因素身份验证（MFA）等安全附加组件
+#使用它，你需要向项目添加一些依赖项，然后在application.yml文件中配置一些属性。这是保护 Spring Boot 应用的方法之一
+#  security:
+#    cauth2:
+#      client:
+#        registration:
+#          okta:
+#            client-id: {clientId}
+#            client-secret: {clientSecret}
+#        provider:
+#           okta:
+#              issuer-uri: https://{yourOktaDomain}/oauth2/default
 #mybatis
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*Mapper.xml

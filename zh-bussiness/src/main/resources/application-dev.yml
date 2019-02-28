@@ -3,7 +3,7 @@
 file:
   upload-path: D:/upload/
 server:
-  port: 10086
+  port: 10087
 spring:
   application:
     name: zh-dev
