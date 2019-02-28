@@ -144,6 +144,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //spring安全性默认提供了许多安全标头
 //        http.headers().contentSecurityPolicy("script-src 'self' https://trustedscripts.example.com; object-src https://trustedplugins.example.com; report-uri /csp-report-endpoint/");
 
+        //Spring Boot应用程序中强制使用HTTPS
+//        http.requiresChannel().requiresSecure();
+
     }
 
 }

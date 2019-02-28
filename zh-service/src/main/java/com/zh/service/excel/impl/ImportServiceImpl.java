@@ -1,16 +1,24 @@
 package com.zh.service.excel.impl;
+
 import com.zh.entity.test2.ZUser;
 import com.zh.enums.ExceptionEnum;
 import com.zh.exceptions.UnifiedException;
 import com.zh.service.excel.ImportService;
+import com.zh.service.test2.ZUserService;
 import com.zh.util.DateUtil;
 import com.zh.util.file.excel.ExcelHelper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.io.InputStream;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -40,6 +48,12 @@ import java.util.List;
 // **/
 @Service
 public class ImportServiceImpl implements ImportService {
+    @Resource
+    private ZUserService zUserService;
+    @Resource
+    private PasswordEncoder passwordEncoder;
+    private String defaultPassword = "123456";
+
     @Override
     public boolean importDike(InputStream inputStream) {
         return false;
@@ -118,11 +132,25 @@ public class ImportServiceImpl implements ImportService {
         } catch (Exception e) {
             throw new UnifiedException(ExceptionEnum.EXCEL_IMPORT_FAIL);
         }
-        List<ZUser> zUsers=new ArrayList<>();
-//        list.stream().forEach(zuser->
-//        zUsers.add(ZUser.builder().name(zuser.get(2).toString())
-//        .birthday(zuser.get(3).toString()).college().build()));
-        return false;
+        List<ZUser> zUsers = new ArrayList<>();
+        list.stream().forEach(zuser -> {
+
+            try {
+                zUsers.add(ZUser.builder().name(zuser.get(0).toString())
+                        .mobile(zuser.get(1).toString())
+                        .email(zuser.get(2).toString())
+                        .birthday(new SimpleDateFormat("yyyy-MM-dd").parse(zuser.get(3).toString()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+                        .college(zuser.get(4).toString())
+                        .gender(Integer.valueOf(zuser.get(5).toString()))
+                        .profession(zuser.get(6).toString())
+                        .password(passwordEncoder.encode(defaultPassword))
+                        .build());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        });
+        return zUserService.saveBatch(zUsers);
     }
 //    @Resource
 //    private BasicAdministrativeDivisionService basicAdministrativeDivisionService;

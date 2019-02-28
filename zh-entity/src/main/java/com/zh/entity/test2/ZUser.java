@@ -83,14 +83,20 @@ public class ZUser implements UserDetails,Serializable {
     @ApiModelProperty(hidden = true)
     private List<ZRoles> roles;
 
+    @JsonIgnore
     @TableField(value = "is_deleted", fill = FieldFill.INSERT)
     @TableLogic
+    @ApiModelProperty(hidden = true)
     private Boolean deleted;
 
+    @JsonIgnore
     @TableField(value = "create_time", fill = FieldFill.INSERT)
+    @ApiModelProperty(hidden = true)
     private LocalDateTime createTime;
 
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
     private LocalDateTime updateTime;
 
     @TableField("position")
