@@ -2,6 +2,7 @@ package com.zh.security.util;
 
 import cn.hutool.core.util.StrUtil;
 import com.zh.exceptions.UnifiedException;
+import com.zh.util.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -100,5 +101,25 @@ public class SecurityUtil {
         return xFor;
     }
 
+
+    public static String getIpAddr(HttpServletRequest request)
+            throws Exception {
+        String ip = request.getHeader("X-Real-IP");
+        if (!StringUtil.isBlank(ip) && !"unknown".equalsIgnoreCase(ip)) {
+            return ip;
+        }
+        ip = request.getHeader("X-Forwarded-For");
+        if (!StringUtil.isBlank(ip) && !"unknown".equalsIgnoreCase(ip)) {
+            // 多次反向代理后会有多个IP值，第一个为真实IP。
+            int index = ip.indexOf(',');
+            if (index != -1) {
+                return ip.substring(0, index);
+            } else {
+                return ip;
+            }
+        } else {
+            return request.getRemoteAddr();
+        }
+    }
 
 }

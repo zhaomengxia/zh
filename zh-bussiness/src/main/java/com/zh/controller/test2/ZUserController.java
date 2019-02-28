@@ -1,6 +1,7 @@
 package com.zh.controller.test2;
 
 import com.zh.aop.annotation.Log;
+import com.zh.aop.annotation.LogTwo;
 import com.zh.api.Result;
 import com.zh.dto.user.SysUserInertOrUpdateDTO;
 import com.zh.enums.ExceptionEnum;
@@ -8,6 +9,8 @@ import com.zh.exceptions.UnifiedException;
 import com.zh.service.excel.ImportService;
 import com.zh.service.test2.ZUserService;
 import io.swagger.annotations.ApiOperation;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,12 +49,20 @@ public class ZUserController {
     @ApiOperation(value = "导出用户信息")
     @GetMapping("/exportUser")
     @Log(desc = "导出用户信息")
+    @LogTwo(descTwo = "导出用户信息11")
     public void exportUser(HttpServletResponse response){
         try {
             zUserService.exportUser(response);
         } catch (IOException e) {
             throw new UnifiedException(ExceptionEnum.EXCEL_EXPORT_FAIL);
         }
+    }
+    @Around("exportUser(HttpServletResponse response)")
+    public Object testObject(ProceedingJoinPoint jp) throws Throwable {
+        System.out.print(jp.getSignature()+"开始执行");
+        Object v=jp.proceed();
+        System.out.print(jp.getSignature()+"执行成功");
+        return v;
     }
 
     @ApiOperation(value = "导入用户信息")
@@ -66,8 +77,8 @@ public class ZUserController {
     }
 
     @ApiOperation(value = "导出用户信息2")
-    @RequestMapping("/export")
-    @Log(desc = "导出用户信息")
+    @GetMapping("/export")
+    @Log(desc = "导出用户信息2")
     public void export(){
 
     }
