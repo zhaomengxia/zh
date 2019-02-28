@@ -587,7 +587,7 @@ public class ZUserServiceImpl extends ServiceImpl<ZUserMapper, ZUser> implements
         return null;
     }
 
-//    @Override
+//    网波接口
     public Result<?> getSpecialistName(String paras) {
         if (paras==null){
             paras="";//参数
