@@ -40,7 +40,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class ZUser implements UserDetails,Serializable {
 
     private static final long serialVersionUID = 1L;
-
     @TableId(value = "id", type = IdType.ID_WORKER)
     protected Long id;
 
